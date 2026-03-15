@@ -4,11 +4,19 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\TaskSubmissionsResource\Pages;
 use App\Filament\Resources\TaskSubmissionsResource\RelationManagers;
+use App\Models\Task;
 use App\Models\TaskSubmission;
+use App\Models\User;
 use Filament\Forms;
+use Filament\Forms\Components\DateTimePicker;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\BadgeColumn;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -23,7 +31,45 @@ class TaskSubmissionsResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Select::make('task_id')
+                    ->label('Task')
+                    ->options(Task::pluck('title', 'id'))
+                    ->searchable()
+                    ->required(),
+
+                Select::make('user_id')
+                    ->label('Member')
+                    ->options(User::pluck('full_name', 'id'))
+                    ->searchable()
+                    ->required(),
+
+                TextInput::make('submission_link')
+                    ->url()
+                    ->required(),
+
+                Textarea::make('submission_note')
+                    ->label('Note')
+                    ->columnSpanFull(),
+
+                Select::make('status')
+                    ->options([
+                        'pending' => 'Pending',
+                        'approved' => 'Approved',
+                        'rejected' => 'Rejected',
+                    ])
+                    ->default('pending')
+                    ->required(),
+
+                Select::make('reviewed_by')
+                    ->label('Reviewer')
+                    ->options(User::pluck('full_name', 'id'))
+                    ->searchable(),
+
+                DateTimePicker::make('submitted_at')
+                    ->label('Submitted At'),
+
+                DateTimePicker::make('reviewed_at')
+                    ->label('Reviewed At'),
             ]);
     }
 
@@ -31,7 +77,30 @@ class TaskSubmissionsResource extends Resource
     {
         return $table
             ->columns([
-                //
+                TextColumn::make('task.title')
+                    ->label('Task')
+                    ->searchable(),
+
+                TextColumn::make('user.full_name')
+                    ->label('Member')
+                    ->searchable(),
+
+                TextColumn::make('submission_link')
+                    ->openUrlInNewTab(),
+
+                TextColumn::make('status')
+                    ->badge()
+                    ->colors([
+                        'warning' => 'pending',
+                        'success' => 'approved',
+                        'danger' => 'rejected',
+                    ]),
+
+                TextColumn::make('submitted_at')
+                    ->dateTime(),
+
+                TextColumn::make('reviewer.full_name')
+                    ->label('Reviewer'),
             ])
             ->filters([
                 //

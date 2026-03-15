@@ -4,11 +4,17 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\TasksResource\Pages;
 use App\Filament\Resources\TasksResource\RelationManagers;
+use App\Models\ClassModel;
 use App\Models\Task;
 use Filament\Forms;
+use Filament\Forms\Components\DateTimePicker;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -23,7 +29,26 @@ class TasksResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Select::make('class_id')
+                    ->label('Class')
+                    ->options(ClassModel::pluck('name', 'id'))
+                    ->searchable()
+                    ->required(),
+
+                TextInput::make('title')
+                    ->required()
+                    ->maxLength(255),
+
+                Textarea::make('description')
+                    ->columnSpanFull(),
+
+                TextInput::make('points')
+                    ->numeric()
+                    ->required(),
+
+                DateTimePicker::make('deadline')
+                    ->required()
+                    ->label('Deadline'),
             ]);
     }
 
@@ -31,7 +56,24 @@ class TasksResource extends Resource
     {
         return $table
             ->columns([
-                //
+
+                TextColumn::make('title')
+                    ->searchable(),
+
+                TextColumn::make('class.name')
+                    ->label('Class')
+                    ->searchable(),
+
+                TextColumn::make('points')
+                    ->sortable(),
+
+                TextColumn::make('deadline')
+                    ->dateTime(),
+
+                TextColumn::make('submissions_count')
+                    ->counts('submissions')
+                    ->label('Submissions'),
+
             ])
             ->filters([
                 //

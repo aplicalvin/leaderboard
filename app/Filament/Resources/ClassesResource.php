@@ -6,9 +6,15 @@ use App\Filament\Resources\ClassesResource\Pages;
 use App\Filament\Resources\ClassesResource\RelationManagers;
 use App\Models\ClassModel;
 use Filament\Forms;
+use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\ImageColumn;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -19,11 +25,37 @@ class ClassesResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected static ?string $navigationLabel = 'Class';
+    protected static ?string $modelLabel = 'Class';
+    protected static ?string $pluralModelLabel = 'Class';
+
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                //
+            TextInput::make('name')
+                ->required()
+                ->label('Class Name'),
+
+            FileUpload::make('image')
+                ->image()
+                ->directory('class-images'),
+
+            Textarea::make('description')
+                ->columnSpanFull(),
+
+            Select::make('mentor_id')
+                ->label('Mentor')
+                ->relationship('mentor', 'full_name')
+                ->searchable()
+                ->preload(),
+
+            Select::make('members')
+                ->label('Members')
+                ->relationship('members', 'full_name')
+                ->multiple()
+                ->searchable()
+                ->preload(),
             ]);
     }
 
@@ -31,7 +63,19 @@ class ClassesResource extends Resource
     {
         return $table
             ->columns([
-                //
+                ImageColumn::make('image')
+                    ->label('Image'),
+
+                TextColumn::make('name')
+                    ->searchable(),
+
+                TextColumn::make('mentor.full_name')
+                    ->label('Mentor')
+                    ->searchable(),
+
+                TextColumn::make('members_count')
+                    ->counts('members')
+                    ->label('Total Members'),
             ])
             ->filters([
                 //

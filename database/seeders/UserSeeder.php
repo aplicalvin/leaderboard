@@ -1,0 +1,30 @@
+<?php
+
+namespace Database\Seeders;
+
+use App\Models\User;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Role;
+
+class UserSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     */
+    public function run(): void
+    {
+        $roleAdmin = Role::create(['name' => 'admin']);
+        Role::create(['name' => 'mentor']);
+        Role::create(['name' => 'member']);
+
+        $admin = User::create([
+            'username' => 'admin',
+            'full_name' => 'admin',
+            'email' => 'admin@gmail.com',
+            'password' => bcrypt('Polke001'),
+        ]);
+
+        $admin->assignRole($roleAdmin);
+    }
+}
