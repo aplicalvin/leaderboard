@@ -2,7 +2,7 @@
     <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
         <div class="flex flex-col md:flex-row justify-between items-center gap-4">
             <div class="flex items-center gap-2">
-                <span class="text-mariner-500 text-sm font-semibold">© {{ date('Y') }} Data & Networking Core Club.</span>
+                <span class="text-mariner-500 text-sm font-semibold">© {{ date('Y') }} Dian Nuswantoro Computer Club.</span>
             </div>
             
             <div class="flex space-x-6">
