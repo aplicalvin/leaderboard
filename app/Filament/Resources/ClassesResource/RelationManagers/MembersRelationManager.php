@@ -36,6 +36,22 @@ class MembersRelationManager extends RelationManager
                 Tables\Columns\TextColumn::make('full_name')
                     ->label('Member'),
                 Tables\Columns\TextColumn::make('email'),
+
+                Tables\Columns\TextColumn::make('points')
+                    ->label('Points')
+                    ->getStateUsing(function ($record, $livewire) {
+
+                        $classId = $livewire->ownerRecord->id;
+
+                        $points = \App\Models\ScoreLog::where('user_id', $record->id)
+                            ->whereHas('task', function ($q) use ($classId) {
+                                $q->where('class_id', $classId);
+                            })
+                            ->sum('points');
+
+                        return $points ?? 0;
+                    })
+                    ->color('success')
             ])
             ->filters([
                 //

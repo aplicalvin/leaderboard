@@ -8,12 +8,18 @@ use Illuminate\Auth\Access\Response;
 
 class TaskSubmissionPolicy
 {
+    public function before(User $user)
+    {
+        if ($user->isAdmin()) {
+            return true;
+        }
+    }
     /**
      * Determine whether the user can view any models.
      */
     public function viewAny(User $user): bool
     {
-        return $user->hasRole(['admin','mentor']);
+        return $user->hasRole(['mentor']);
     }
 
     /**
@@ -37,10 +43,6 @@ class TaskSubmissionPolicy
      */
     public function update(User $user, TaskSubmission $taskSubmission): bool
     {
-        if ($user->hasRole('admin')) {
-            return true;
-        }
-
         return $taskSubmission->task->class->mentor_id === $user->id;
     }
 
