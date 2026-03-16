@@ -18,7 +18,14 @@ class ScoreLogsResource extends Resource
 {
     protected static ?string $model = ScoreLog::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-document';
+
+    protected static ?int $navigationSort = 6;
+
+    public static function canViewAny(): bool
+    {
+        return auth()->user()?->hasRole('admin');
+    }
 
     public static function form(Form $form): Form
     {

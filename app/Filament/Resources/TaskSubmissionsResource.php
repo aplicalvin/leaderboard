@@ -25,7 +25,9 @@ class TaskSubmissionsResource extends Resource
 {
     protected static ?string $model = TaskSubmission::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-clipboard-document-check';
+
+    protected static ?int $navigationSort = 5;
 
     public static function form(Form $form): Form
     {
@@ -142,7 +144,9 @@ class TaskSubmissionsResource extends Resource
         $query = parent::getEloquentQuery();
 
         if (auth()->user()->hasRole('mentor')) {
-            $query->where('mentor_id', auth()->id());
+            $query->whereHas('task.class', function ($q) {
+                $q->where('mentor_id', auth()->id());
+            });
         }
 
         return $query;

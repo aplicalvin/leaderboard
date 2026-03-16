@@ -4,77 +4,64 @@ namespace App\Policies;
 
 use App\Models\ClassModel;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
 
 class ClassPolicy
 {
     /**
-     * Determine whether the user can view any models.
+     * Admin memiliki akses penuh
+     */
+    public function before(User $user, string $ability)
+    {
+        if ($user->hasRole('admin')) {
+            return true;
+        }
+    }
+
+    /**
+     * Mentor bisa melihat daftar class
      */
     public function viewAny(User $user): bool
     {
-        return $user->hasRole(['admin','mentor']);
+        return $user->hasRole('mentor');
     }
 
     /**
-     * Determine whether the user can view the model.
+     * Mentor hanya bisa melihat class yang dia ampu
      */
     public function view(User $user, ClassModel $classModel): bool
     {
-        if ($user->hasRole('admin')) {
-            return true;
-        }
-
-        if ($user->hasRole('mentor')) {
-            return $classModel->mentor_id === $user->id;
-        }
-
-        return false;
+        return $classModel->mentor_id === $user->id;
     }
 
     /**
-     * Determine whether the user can create models.
+     * Hanya admin yang bisa membuat class
      */
     public function create(User $user): bool
     {
-        return $user->hasRole(['admin']);
-    }
-
-    /**
-     * Determine whether the user can update the model.
-     */
-    public function update(User $user, ClassModel $classModel): bool
-    {
-        if ($user->hasRole('admin')) {
-            return true;
-        }
-
-        if ($user->hasRole('mentor')) {
-            return $classModel->mentor_id === $user->id;
-        }
-
         return false;
     }
 
     /**
-     * Determine whether the user can delete the model.
+     * Mentor bisa update class yang dia ampu
      */
-    public function delete(User $user, ClassModel $classModel): bool
+    public function update(User $user, ClassModel $classModel): bool
     {
-        return $user->hasRole('admin');
+        return $classModel->mentor_id === $user->id;
     }
 
     /**
-     * Determine whether the user can restore the model.
+     * Hanya admin yang boleh delete
      */
+    public function delete(User $user, ClassModel $classModel): bool
+    {
+        return false;
+    }
+
     public function restore(User $user, ClassModel $classModel): bool
     {
         return false;
     }
 
-    /**
-     * Determine whether the user can permanently delete the model.
-     */
     public function forceDelete(User $user, ClassModel $classModel): bool
     {
         return false;

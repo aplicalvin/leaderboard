@@ -23,7 +23,9 @@ class TasksResource extends Resource
 {
     protected static ?string $model = Task::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-clipboard-document-list';
+
+    protected static ?int $navigationSort = 4;
 
     public static function form(Form $form): Form
     {
@@ -79,7 +81,9 @@ class TasksResource extends Resource
                 //
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -109,7 +113,9 @@ class TasksResource extends Resource
         $query = parent::getEloquentQuery();
 
         if (auth()->user()->hasRole('mentor')) {
-            $query->where('mentor_id', auth()->id());
+            $query->whereHas('class', function ($q) {
+                $q->where('mentor_id', auth()->id());
+            });
         }
 
         return $query;

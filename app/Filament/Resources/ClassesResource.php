@@ -23,11 +23,18 @@ class ClassesResource extends Resource
 {
     protected static ?string $model = ClassModel::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-rectangle-group';
 
     protected static ?string $navigationLabel = 'Class';
     protected static ?string $modelLabel = 'Class';
     protected static ?string $pluralModelLabel = 'Class';
+
+    protected static ?int $navigationSort = 3;
+
+     public static function canCreate(): bool
+    {
+        return auth()->user()?->hasRole('admin');
+    }
 
     public static function form(Form $form): Form
     {
@@ -83,7 +90,8 @@ class ClassesResource extends Resource
             ->actions([
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\DeleteAction::make()
+                    ->visible(fn () => auth()->user()->hasRole('admin')),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
