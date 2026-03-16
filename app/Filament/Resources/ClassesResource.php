@@ -55,7 +55,9 @@ class ClassesResource extends Resource
                 ->label('Mentor')
                 ->relationship('mentor', 'full_name')
                 ->searchable()
-                ->preload(),
+                ->preload()
+                ->disabled(fn () => !auth()->user()->hasRole('admin'))
+                ->dehydrated(fn () => auth()->user()->hasRole('admin')),
 
             // Select::make('members')
             //     ->label('Members')

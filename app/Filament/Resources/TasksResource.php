@@ -33,8 +33,17 @@ class TasksResource extends Resource
             ->schema([
                 Select::make('class_id')
                     ->label('Class')
-                    ->options(ClassModel::pluck('name', 'id'))
+                    ->relationship(
+                        name: 'class',
+                        titleAttribute: 'name',
+                        modifyQueryUsing: function ($query) {
+                            if (auth()->user()->hasRole('mentor')) {
+                                $query->where('mentor_id', auth()->id());
+                            }
+                        }
+                    )
                     ->searchable()
+                    ->preload()
                     ->required(),
 
                 TextInput::make('title')
