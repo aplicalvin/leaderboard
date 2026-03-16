@@ -2,39 +2,24 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\Frontend\LeaderboardController;
+use App\Http\Controllers\Frontend\MemberController;
+use App\Http\Controllers\Frontend\MentorController;
+use App\Http\Controllers\Frontend\ClassController;
 
+Route::get('/', [HomeController::class, 'index']);
 
 // LEADERBOARD
-Route::get('/leaderboard', function () {
-    return view('leaderboard');
-});
+Route::get('/leaderboard', [LeaderboardController::class, 'index']);
 
 // MEMBER
-Route::get('/member', function () {
-    return view('member');
-});
-
-// MEMBER DETAIL
-Route::get('/member/detail', function () {
-    return view('member-detail');
-});
+Route::get('/member', [MemberController::class, 'index']);
+Route::get('/member/{id}', [MemberController::class, 'show']);
 
 // MENTOR 
-Route::get('/mentor', function () {
-    return view('mentor');
-});
-
-// MENTOR DETAIL
-Route::get('/mentor/detail', function () {
-    return view('mentor-detail');
-});
+Route::get('/mentor', [MentorController::class, 'index']);
+Route::get('/mentor/{id}', [MentorController::class, 'show']);
 
 // CLASS
-Route::get('/class', function () {
-    return view('class');
-});
-
-
+Route::get('/class', [ClassController::class, 'index']);

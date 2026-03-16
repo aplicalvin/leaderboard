@@ -22,69 +22,7 @@
     </div>
 
     @php
-        // Dummy Data Setup for Classes
-        $classes = [
-            [
-                'id' => 1,
-                'name' => 'Advanced Networking',
-                'category' => 'Networking',
-                'thumbnail' => 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&q=80&w=600',
-                'description' => 'Master the concepts of routing, switching, and cloud infrastructure required for enterprise networks.',
-                'mentor' => 'David Martinez',
-                'points_reward' => 500,
-                'members_count' => 142
-            ],
-            [
-                'id' => 2,
-                'name' => 'Cybersecurity Fundamentals',
-                'category' => 'Security',
-                'thumbnail' => 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=600',
-                'description' => 'Learn the basics of ethical hacking, secure systems design, and vulnerability assessment.',
-                'mentor' => 'Sarah Johnson',
-                'points_reward' => 450,
-                'members_count' => 210
-            ],
-            [
-                'id' => 3,
-                'name' => 'Cloud Architecture AWS',
-                'category' => 'Cloud',
-                'thumbnail' => 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=600',
-                'description' => 'Design, deploy, and manage scalable cloud infrastructure using Amazon Web Services.',
-                'mentor' => 'Michael Lin',
-                'points_reward' => 600,
-                'members_count' => 89
-            ],
-            [
-                'id' => 4,
-                'name' => 'Network Automation',
-                'category' => 'Networking',
-                'thumbnail' => 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=600',
-                'description' => 'Automate your repetitive network tasks using Python, Ansible, and API integrations.',
-                'mentor' => 'Jessica Wong',
-                'points_reward' => 550,
-                'members_count' => 56
-            ],
-            [
-                'id' => 5,
-                'name' => 'Linux System Admin',
-                'category' => 'Infrastructure',
-                'thumbnail' => 'https://images.unsplash.com/photo-1629654297299-c8506221ca97?auto=format&fit=crop&q=80&w=600',
-                'description' => 'Comprehensive guide to mastering Linux server administration and troubleshooting.',
-                'mentor' => 'Alex Chen',
-                'points_reward' => 400,
-                'members_count' => 312
-            ],
-            [
-                'id' => 6,
-                'name' => 'Penetration Testing',
-                'category' => 'Security',
-                'thumbnail' => 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&q=80&w=600',
-                'description' => 'Advanced hands-on hacking techniques and methodologies for professional pentesters.',
-                'mentor' => 'Sarah Johnson',
-                'points_reward' => 800,
-                'members_count' => 74
-            ],
-        ];
+        // $classes is passed from the backend controller
     @endphp
 
     <!-- Class Grid -->
@@ -99,13 +37,13 @@
             <div class="h-48 shrink-0 relative overflow-hidden bg-mariner-100">
                 <div class="absolute inset-0 bg-mariner-900/10 group-hover:bg-transparent transition-colors z-10"></div>
                 <!-- Thumbnail Image -->
-                <img src="{{ $class['thumbnail'] }}" alt="{{ $class['name'] }}" class="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-110">
+                <img src="{{ $class->image ?? 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&q=80&w=600' }}" alt="{{ $class->name }}" class="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-110">
             </div>
 
             <!-- Info container -->
             <div class="p-6 flex flex-col flex-grow relative z-20 bg-white">
-                <h3 class="text-xl font-bold text-mariner-950 mb-2 tracking-tight group-hover:text-mariner-600 transition-colors">{{ $class['name'] }}</h3>
-                <p class="text-sm text-mariner-600 mb-6 line-clamp-2 leading-relaxed flex-grow font-medium">{{ $class['description'] }}</p>
+                <h3 class="text-xl font-bold text-mariner-950 mb-2 tracking-tight group-hover:text-mariner-600 transition-colors">{{ $class->name }}</h3>
+                <p class="text-sm text-mariner-600 mb-6 line-clamp-2 leading-relaxed flex-grow font-medium">{{ $class->description }}</p>
                 
                 <div class="pt-4 mt-auto border-t border-mariner-100 flex items-center justify-between">
                     <!-- Mentor Details attached -->
@@ -115,13 +53,13 @@
                         </div>
                         <div>
                             <p class="text-[10px] uppercase tracking-wider text-mariner-400 font-bold mb-0 leading-none">Mentor</p>
-                            <p class="text-xs font-bold text-mariner-800 mt-0.5">{{ $class['mentor'] }}</p>
+                            <p class="text-xs font-bold text-mariner-800 mt-0.5">{{ $class->mentor->name ?? 'Unknown' }}</p>
                         </div>
                     </div>
                     
                     <div class="flex items-center gap-1.5 text-mariner-600 font-bold text-sm">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
-                        {{ number_format($class['members_count']) }}
+                        {{ number_format($class->members_count ?? 10) }}
                     </div>
                 </div>
 
@@ -139,6 +77,11 @@
             <p class="text-mariner-500 font-medium max-w-sm mx-auto">There are currently no classes available in this category. Check back later!</p>
         </div>
         @endforelse
+    </div>
+    
+    <!-- Pagination -->
+    <div class="mt-8 flex justify-center shadow-sm">
+        {{ $classes->links() }}
     </div>
 </div>
 @endsection

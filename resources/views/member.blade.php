@@ -15,17 +15,7 @@
     </header>
 
     @php
-        // Dummy Data Setup for Member List
-        $users = [
-            ['id' => 1, 'rank' => 1, 'name' => 'Alex Chen', 'username' => '@alexc', 'nim' => '202310045', 'points' => 9850, 'avatar' => \App\Http\Controllers\Controller::getAvatarUrl('202310045', 'Alex Chen')],
-            ['id' => 2, 'rank' => 2, 'name' => 'Sarah Johnson', 'username' => '@sarahj', 'nim' => '202310012', 'points' => 8420, 'avatar' => \App\Http\Controllers\Controller::getAvatarUrl('202310012', 'Sarah Johnson')],
-            ['id' => 3, 'rank' => 3, 'name' => 'Michael Lin', 'username' => '@mlin99', 'nim' => '202310078', 'points' => 7900, 'avatar' => \App\Http\Controllers\Controller::getAvatarUrl('202310078', 'Michael Lin')],
-            ['id' => 4, 'rank' => 4, 'name' => 'Jessica Wong', 'username' => '@jwong', 'nim' => '202310112', 'points' => 7200, 'avatar' => \App\Http\Controllers\Controller::getAvatarUrl('202310112', 'Jessica Wong')],
-            ['id' => 5, 'rank' => 5, 'name' => 'David Smith', 'username' => '@daves', 'nim' => 'A11.2023.14880', 'points' => 6850, 'avatar' => \App\Http\Controllers\Controller::getAvatarUrl('A11.2023.14880', 'David Smith')],
-            ['id' => 6, 'rank' => 6, 'name' => 'Emily Davis', 'username' => '@emilyd', 'nim' => '202310156', 'points' => 6500, 'avatar' => \App\Http\Controllers\Controller::getAvatarUrl('202310156', 'Emily Davis')],
-            ['id' => 7, 'rank' => 7, 'name' => 'Ryan Taylor', 'username' => '@ryant', 'nim' => '202310089', 'points' => 6120, 'avatar' => \App\Http\Controllers\Controller::getAvatarUrl('202310089', 'Ryan Taylor')],
-            ['id' => 8, 'rank' => 8, 'name' => 'Lisa Wong', 'username' => '@lisaw', 'nim' => 'B11.2023.00010', 'points' => 5800, 'avatar' => \App\Http\Controllers\Controller::getAvatarUrl('B11.2023.00010', 'Lisa Wong')],
-        ];
+        // The $users collection is passed from the MemberController
     @endphp
 
     <!-- Search/Filter Bar (UI Only) -->
@@ -49,34 +39,34 @@
     <!-- Member Grid -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 relative z-10">
         @forelse($users as $user)
-        <a href="/member/detail" class="glass-panel bg-white rounded-2xl p-5 flex items-center gap-4 transition-all duration-300 hover:bg-mariner-50 hover:-translate-y-1 hover:shadow-md border border-mariner-100 hover:border-mariner-300 group shadow-sm">
+        <a href="/member/{{ $user->id }}" class="glass-panel bg-white rounded-2xl p-5 flex items-center gap-4 transition-all duration-300 hover:bg-mariner-50 hover:-translate-y-1 hover:shadow-md border border-mariner-100 hover:border-mariner-300 group shadow-sm">
             
             <!-- Rank Indicator -->
-            <div class="w-12 h-12 shrink-0 rounded-xl bg-gradient-to-br from-mariner-50 to-mariner-100 border border-mariner-200 flex items-center justify-center font-black text-xl {{ $user['rank'] <= 3 ? 'text-transparent bg-clip-text bg-gradient-to-br from-yellow-500 to-amber-700' : 'text-mariner-500 group-hover:text-mariner-700 transition-colors' }}">
-                #{{ $user['rank'] }}
+            <div class="w-12 h-12 shrink-0 rounded-xl bg-gradient-to-br from-mariner-50 to-mariner-100 border border-mariner-200 flex items-center justify-center font-black text-xl {{ $user->rank <= 3 ? 'text-transparent bg-clip-text bg-gradient-to-br from-yellow-500 to-amber-700' : 'text-mariner-500 group-hover:text-mariner-700 transition-colors' }}">
+                #{{ $user->rank }}
             </div>
 
             <!-- Avatar -->
             <div class="w-14 h-14 shrink-0 rounded-full border-2 border-mariner-100 overflow-hidden relative group-hover:border-mariner-400 transition-colors">
-                <img src="{{ $user['avatar'] }}" alt="{{ $user['name'] }}" class="w-full h-full object-cover">
+                <img src="{{ $user->avatar }}" alt="{{ $user->name }}" class="w-full h-full object-cover">
             </div>
 
             <!-- Member Info -->
             <div class="flex-grow min-w-0">
                 <div class="flex items-center gap-2 mb-0.5">
-                    <h3 class="text-base font-bold text-mariner-900 truncate group-hover:text-mariner-700 transition-colors">{{ $user['name'] }}</h3>
+                    <h3 class="text-base font-bold text-mariner-900 truncate group-hover:text-mariner-700 transition-colors">{{ $user->name }}</h3>
                 </div>
                 <div class="flex items-center gap-2 text-xs text-mariner-500 font-medium">
-                    <span class="truncate">{{ $user['username'] }}</span>
+                    <span class="truncate">{{ $user->username }}</span>
                     <span class="w-1 h-1 rounded-full bg-mariner-300"></span>
-                    <span class="font-mono text-mariner-400">{{ $user['nim'] }}</span>
+                    <span class="font-mono text-mariner-400">{{ $user->nim }}</span>
                 </div>
             </div>
 
             <!-- Points -->
             <div class="shrink-0 text-right pr-2">
                 <div class="text-xl font-black text-mariner-600 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-mariner-500 group-hover:to-mariner-800 transition-all duration-300 tabular-nums">
-                    {{ number_format($user['points']) }}
+                    {{ number_format($user->points) }}
                 </div>
                 <span class="text-[10px] text-mariner-400 font-bold uppercase tracking-widest group-hover:text-mariner-500 transition-colors">Pts</span>
             </div>
@@ -93,23 +83,9 @@
         @endforelse
     </div>
 
-    <!-- Pagination (UI Only) -->
+    <!-- Pagination -->
     <div class="mt-8 flex justify-center shadow-sm">
-        <nav class="relative z-0 inline-flex rounded-xl overflow-hidden shadow-sm flex-wrap justify-center border border-mariner-200 bg-white" aria-label="Pagination">
-            <a href="#" class="relative inline-flex items-center px-2 py-2 border-r border-mariner-100 bg-white text-sm font-medium text-mariner-400 hover:bg-mariner-50 transition-colors">
-                <span class="sr-only">Previous</span>
-                <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
-            </a>
-            <a href="#" class="relative inline-flex items-center px-4 py-2 border-r border-mariner-100 bg-mariner-500 text-sm font-bold text-white transition-colors">1</a>
-            <a href="#" class="relative inline-flex items-center px-4 py-2 border-r border-mariner-100 bg-white text-sm font-semibold text-mariner-600 hover:bg-mariner-50 transition-colors">2</a>
-            <a href="#" class="relative inline-flex items-center px-4 py-2 border-r border-mariner-100 bg-white text-sm font-semibold text-mariner-600 hover:bg-mariner-50 transition-colors">3</a>
-            <span class="relative inline-flex items-center px-4 py-2 border-r border-mariner-100 bg-mariner-50/50 text-sm font-medium text-mariner-400">...</span>
-            <a href="#" class="relative inline-flex items-center px-4 py-2 border-r border-mariner-100 bg-white text-sm font-semibold text-mariner-600 hover:bg-mariner-50 transition-colors">10</a>
-            <a href="#" class="relative inline-flex items-center px-2 py-2 bg-white text-sm font-medium text-mariner-400 hover:bg-mariner-50 transition-colors">
-                <span class="sr-only">Next</span>
-                <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
-            </a>
-        </nav>
+        {{ $users->links() }}
     </div>
 </div>
 @endsection

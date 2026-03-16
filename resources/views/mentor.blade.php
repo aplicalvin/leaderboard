@@ -20,51 +20,7 @@
     </header>
 
     @php
-        // Dummy Data Setup for Mentors List
-        $mentors = [
-            [
-                'id' => 1, 
-                'name' => 'Dr. Alan Turing', 
-                'nim' => 'M-10045',
-                'avatar' => \App\Http\Controllers\Controller::getAvatarUrl('M-10045', 'Alan Turing'),
-                'classes_count' => 12,
-            ],
-            [
-                'id' => 2, 
-                'name' => 'Grace Hopper', 
-                'nim' => 'M-10012',
-                'avatar' => \App\Http\Controllers\Controller::getAvatarUrl('M-10012', 'Grace Hopper'),
-                'classes_count' => 8,
-            ],
-            [
-                'id' => 3, 
-                'name' => 'Linus Torvalds', 
-                'nim' => 'M-10078',
-                'avatar' => \App\Http\Controllers\Controller::getAvatarUrl('M-10078', 'Linus Torvalds'),
-                'classes_count' => 15,
-            ],
-            [
-                'id' => 4, 
-                'name' => 'Ada Lovelace', 
-                'nim' => 'M-10112',
-                'avatar' => \App\Http\Controllers\Controller::getAvatarUrl('M-10112', 'Ada Lovelace'),
-                'classes_count' => 5,
-            ],
-            [
-                'id' => 5, 
-                'name' => 'Tim Berners-Lee', 
-                'nim' => 'M-10234',
-                'avatar' => \App\Http\Controllers\Controller::getAvatarUrl('M-10234', 'Tim Berners-Lee'),
-                'classes_count' => 9,
-            ],
-            [
-                'id' => 6, 
-                'name' => 'Margaret Hamilton', 
-                'nim' => 'M-10156',
-                'avatar' => \App\Http\Controllers\Controller::getAvatarUrl('M-10156', 'Margaret Hamilton'),
-                'classes_count' => 7,
-            ],
-        ];
+        // $mentors is passed from the backend controller
     @endphp
 
     <!-- Mentors Grid -->
@@ -76,13 +32,13 @@
             <div class="px-6 pb-6 pt-10 relative flex flex-col items-center text-center">
                 <!-- Avatar -->
                 <div class="w-28 h-28 rounded-full border-4 border-white overflow-hidden bg-mariner-100 shadow-[0_5px_15px_rgba(6,132,255,0.15)] group-hover:border-mariner-200 transition-colors z-20 transform group-hover:-translate-y-2 duration-300 mb-5 relative">
-                    <img src="{{ $mentor['avatar'] }}" alt="{{ $mentor['name'] }}" class="w-full h-full object-cover">
+                    <img src="{{ $mentor->avatar }}" alt="{{ $mentor->name }}" class="w-full h-full object-cover">
                 </div>
 
                 <!-- Info -->
-                <h3 class="text-2xl font-bold text-mariner-950 mb-2 group-hover:text-mariner-600 transition-colors">{{ $mentor['name'] }}</h3>
+                <h3 class="text-2xl font-bold text-mariner-950 mb-2 group-hover:text-mariner-600 transition-colors">{{ $mentor->name }}</h3>
                 <div class="inline-flex items-center mb-6">
-                    <span class="px-3 py-1 rounded-full text-xs font-mono bg-mariner-50 text-mariner-600 border border-mariner-200 uppercase tracking-widest font-bold shadow-sm">{{ $mentor['nim'] }}</span>
+                    <span class="px-3 py-1 rounded-full text-xs font-mono bg-mariner-50 text-mariner-600 border border-mariner-200 uppercase tracking-widest font-bold shadow-sm">{{ $mentor->nim }}</span>
                 </div>
 
                 <!-- Active Class Stat -->
@@ -93,11 +49,11 @@
                         </div>
                         <span class="text-sm font-bold text-mariner-900">Active Classes</span>
                     </div>
-                    <div class="text-2xl font-black text-mariner-600">{{ $mentor['classes_count'] }}</div>
+                    <div class="text-2xl font-black text-mariner-600">{{ $mentor->classes_count }}</div>
                 </div>
 
                 <!-- Action Button -->
-                <a href="/mentor/detail" class="w-full block text-center py-3 rounded-xl border border-mariner-200 bg-mariner-50 text-mariner-700 font-extrabold text-sm tracking-wide transition-all duration-300 hover:bg-mariner-500 hover:text-white hover:border-mariner-400 hover:shadow-[0_8px_20px_rgba(6,132,255,0.25)]">
+                <a href="/mentor/{{ $mentor->id }}" class="w-full block text-center py-3 rounded-xl border border-mariner-200 bg-mariner-50 text-mariner-700 font-extrabold text-sm tracking-wide transition-all duration-300 hover:bg-mariner-500 hover:text-white hover:border-mariner-400 hover:shadow-[0_8px_20px_rgba(6,132,255,0.25)]">
                     View Profile
                 </a>
             </div>
@@ -108,6 +64,11 @@
             <p class="text-mariner-500 font-medium max-w-sm mx-auto">We couldn't find any mentors matching your criteria.</p>
         </div>
         @endforelse
+    </div>
+
+    <!-- Pagination -->
+    <div class="mt-8 flex justify-center shadow-sm">
+        {{ $mentors->links() }}
     </div>
 </div>
 @endsection
