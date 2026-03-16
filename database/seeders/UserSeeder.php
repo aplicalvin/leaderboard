@@ -14,17 +14,42 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        $roleAdmin = Role::create(['name' => 'admin']);
-        Role::create(['name' => 'mentor']);
-        Role::create(['name' => 'member']);
-
+        // Admin
         $admin = User::create([
             'username' => 'admin',
-            'full_name' => 'admin',
+            'full_name' => 'Administrator',
             'email' => 'admin@gmail.com',
             'password' => bcrypt('Polke001'),
         ]);
 
-        $admin->assignRole($roleAdmin);
+        $admin->assignRole('admin');
+
+
+        // Mentor
+        for ($i = 1; $i <= 5; $i++) {
+
+            $mentor = User::create([
+                'username' => 'mentor'.$i,
+                'full_name' => 'Mentor '.$i,
+                'email' => 'mentor'.$i.'@gmail.com',
+                'password' => bcrypt('password'),
+            ]);
+
+            $mentor->assignRole('mentor');
+        }
+
+
+        // Member
+        for ($i = 1; $i <= 10; $i++) {
+
+            $member = User::create([
+                'username' => 'member'.$i,
+                'full_name' => 'Member '.$i,
+                'email' => 'member'.$i.'@gmail.com',
+                'password' => bcrypt('password'),
+            ]);
+
+            $member->assignRole('member');
+        }
     }
 }

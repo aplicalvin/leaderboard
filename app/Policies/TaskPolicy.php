@@ -13,7 +13,7 @@ class TaskPolicy
      */
     public function viewAny(User $user): bool
     {
-        return false;
+        return $user->hasRole(['admin','mentor']);
     }
 
     /**
@@ -21,6 +21,14 @@ class TaskPolicy
      */
     public function view(User $user, Task $task): bool
     {
+        if ($user->hasRole('admin')) {
+            return true;
+        }
+
+        if ($user->hasRole('mentor')) {
+            return $task->mentor_id === $user->id;
+        }
+
         return false;
     }
 
@@ -29,7 +37,7 @@ class TaskPolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        return $user->hasRole(['admin','mentor']);
     }
 
     /**
@@ -37,6 +45,14 @@ class TaskPolicy
      */
     public function update(User $user, Task $task): bool
     {
+        if ($user->hasRole('admin')) {
+            return true;
+        }
+
+        if ($user->hasRole('mentor')) {
+            return $task->mentor_id === $user->id;
+        }
+
         return false;
     }
 
@@ -45,6 +61,14 @@ class TaskPolicy
      */
     public function delete(User $user, Task $task): bool
     {
+        if ($user->hasRole('admin')) {
+            return true;
+        }
+
+        if ($user->hasRole('mentor')) {
+            return $task->mentor_id === $user->id;
+        }
+
         return false;
     }
 

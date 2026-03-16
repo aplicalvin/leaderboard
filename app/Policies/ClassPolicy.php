@@ -13,7 +13,7 @@ class ClassPolicy
      */
     public function viewAny(User $user): bool
     {
-        return false;
+        return $user->hasRole(['admin','mentor']);
     }
 
     /**
@@ -21,6 +21,14 @@ class ClassPolicy
      */
     public function view(User $user, ClassModel $classModel): bool
     {
+        if ($user->hasRole('admin')) {
+            return true;
+        }
+
+        if ($user->hasRole('mentor')) {
+            return $classModel->mentor_id === $user->id;
+        }
+
         return false;
     }
 
@@ -29,7 +37,7 @@ class ClassPolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        return $user->hasRole(['admin']);
     }
 
     /**
@@ -37,6 +45,14 @@ class ClassPolicy
      */
     public function update(User $user, ClassModel $classModel): bool
     {
+        if ($user->hasRole('admin')) {
+            return true;
+        }
+
+        if ($user->hasRole('mentor')) {
+            return $classModel->mentor_id === $user->id;
+        }
+
         return false;
     }
 
@@ -45,7 +61,7 @@ class ClassPolicy
      */
     public function delete(User $user, ClassModel $classModel): bool
     {
-        return false;
+        return $user->hasRole('admin');
     }
 
     /**

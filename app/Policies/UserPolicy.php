@@ -7,6 +7,13 @@ use Illuminate\Auth\Access\Response;
 
 class UserPolicy
 {
+    public function before(User $user)
+    {
+        if ($user->isAdmin()) {
+            return true;
+        }
+    }
+
     /**
      * Determine whether the user can view any models.
      */

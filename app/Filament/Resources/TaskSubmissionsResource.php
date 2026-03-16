@@ -15,7 +15,6 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
-use Filament\Tables\Columns\BadgeColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -129,5 +128,16 @@ class TaskSubmissionsResource extends Resource
             'create' => Pages\CreateTaskSubmissions::route('/create'),
             'edit' => Pages\EditTaskSubmissions::route('/{record}/edit'),
         ];
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+        $query = parent::getEloquentQuery();
+
+        if (auth()->user()->hasRole('mentor')) {
+            $query->where('mentor_id', auth()->id());
+        }
+
+        return $query;
     }
 }

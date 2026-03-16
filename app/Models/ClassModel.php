@@ -29,7 +29,7 @@ class ClassModel extends Model
     // Member kelas
     public function members()
     {
-        return $this->belongsToMany(User::class, 'class_members');
+        return $this->belongsToMany(User::class, 'class_members', 'class_id', 'user_id');
     }
 
     // Task dalam kelas

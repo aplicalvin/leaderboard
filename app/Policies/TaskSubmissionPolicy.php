@@ -13,7 +13,7 @@ class TaskSubmissionPolicy
      */
     public function viewAny(User $user): bool
     {
-        return false;
+        return $user->hasRole(['admin','mentor']);
     }
 
     /**
@@ -37,7 +37,11 @@ class TaskSubmissionPolicy
      */
     public function update(User $user, TaskSubmission $taskSubmission): bool
     {
-        return false;
+        if ($user->hasRole('admin')) {
+            return true;
+        }
+
+        return $taskSubmission->task->class->mentor_id === $user->id;
     }
 
     /**

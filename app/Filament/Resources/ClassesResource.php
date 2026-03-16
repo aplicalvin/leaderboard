@@ -50,13 +50,13 @@ class ClassesResource extends Resource
                 ->searchable()
                 ->preload(),
 
-            Select::make('members')
-                ->label('Members')
-                ->relationship('members', 'full_name')
-                ->multiple()
-                ->searchable()
-                ->preload(),
-            ]);
+            // Select::make('members')
+            //     ->label('Members')
+            //     ->relationship('members', 'full_name')
+            //     ->multiple()
+            //     ->searchable()
+            //     ->preload(),
+            ])->columns(1);
     }
 
     public static function table(Table $table): Table
@@ -81,7 +81,9 @@ class ClassesResource extends Resource
                 //
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -93,7 +95,7 @@ class ClassesResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+          RelationManagers\MembersRelationManager::class,
         ];
     }
 
@@ -104,5 +106,16 @@ class ClassesResource extends Resource
             'create' => Pages\CreateClasses::route('/create'),
             'edit' => Pages\EditClasses::route('/{record}/edit'),
         ];
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+        $query = parent::getEloquentQuery();
+
+        if (auth()->user()->hasRole('mentor')) {
+            $query->where('mentor_id', auth()->id());
+        }
+
+        return $query;
     }
 }

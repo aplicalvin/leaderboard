@@ -4,12 +4,14 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Database\Factories\UserFactory;
+use Filament\Models\Contracts\FilamentUser;
+use Filament\Panel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
 
-class User extends Authenticatable
+class User extends Authenticatable implements FilamentUser
 {
     /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable, HasRoles;
@@ -61,7 +63,12 @@ class User extends Authenticatable
     // Member mengikuti banyak kelas
     public function joinedClasses()
     {
-        return $this->belongsToMany(ClassModel::class, 'class_members');
+        return $this->belongsToMany(ClassModel::class, 'class_members', 'user_id','class_id');
+    }
+
+        public function classModels()
+    {
+        return $this->belongsToMany(ClassModel::class, 'class_members', 'user_id','class_id');
     }
 
     // Submission tugas
@@ -82,23 +89,36 @@ class User extends Authenticatable
         return $this->hasMany(Announcement::class, 'created_by');
     }
 
-    public function isAdmin()
+    public function isAdmin(): bool
     {
-        return $this->role === 'admin';
+        return $this->hasRole('admin');
     }
 
-    public function isMentor()
+    public function isMentor(): bool
     {
-        return $this->role === 'mentor';
+        return $this->hasRole('mentor');
     }
 
-    public function isMember()
+    public function isMember(): bool
     {
-        return $this->role === 'member';
+        return $this->hasRole('member');
     }
 
     public function getNameAttribute(): string
     {
         return $this->full_name ?? $this->username;
+    }
+
+    public function canAccessPanel(Panel $panel): bool
+    {
+        if ($panel->getId() === 'admin') {
+            return $this->hasRole('admin');
+        }
+
+        if ($panel->getId() === 'mentor') {
+            return $this->hasRole('mentor');
+        }
+
+        return false;
     }
 }

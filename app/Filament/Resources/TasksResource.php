@@ -103,4 +103,15 @@ class TasksResource extends Resource
             'edit' => Pages\EditTasks::route('/{record}/edit'),
         ];
     }
+
+    public static function getEloquentQuery(): Builder
+    {
+        $query = parent::getEloquentQuery();
+
+        if (auth()->user()->hasRole('mentor')) {
+            $query->where('mentor_id', auth()->id());
+        }
+
+        return $query;
+    }
 }
