@@ -9,10 +9,10 @@
     <div class="text-center mb-16 relative">
         <div class="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-96 bg-mariner-200/50 rounded-full blur-[100px] -z-10 pointer-events-none"></div>
         <h1 class="text-5xl md:text-6xl font-extrabold tracking-tight text-mariner-950 mb-6 drop-shadow-sm">
-            DNCC Leaderboard for <br>
-            <span class="bg-clip-text text-transparent bg-gradient-to-r from-mariner-500 to-mariner-800">Upskilling Session</span>
+            Klasemen DNCC Buat <br>
+            <span class="bg-clip-text text-transparent bg-gradient-to-r from-mariner-500 to-mariner-800">Sesi Upskilling</span>
         </h1>
-        <p class="text-lg text-mariner-700/80 max-w-2xl mx-auto font-medium">Track your progress, explore exciting classes, and learn from our expert mentors to level up your skills.</p>
+        <p class="text-lg text-mariner-700/80 max-w-2xl mx-auto font-medium">Pantau terus progresmu, ikutin kelas-kelas seru yang ada, dan belajar langsung dari Kakak Mentor biar skill-mu makin dewa!</p>
     </div>
 
     <!-- Section: Top 10 Leaderboard -->
@@ -20,10 +20,10 @@
         <div class="flex items-center justify-between mb-8">
             <h2 class="text-3xl font-bold text-mariner-900 flex items-center gap-3">
                 <svg class="w-8 h-8 text-yellow-500 drop-shadow-sm" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5 2a1 1 0 011 1v1h1a1 1 0 010 2H6v1a1 1 0 01-2 0V6H3a1 1 0 010-2h1V3a1 1 0 011-1zm0 10a1 1 0 011 1v1h1a1 1 0 110 2H6v1a1 1 0 11-2 0v-1H3a1 1 0 110-2h1v-1a1 1 0 011-1zM12 2a1 1 0 01.967.744L14.146 7.2 17.5 9.134a1 1 0 010 1.732l-3.354 1.935-1.18 4.455a1 1 0 01-1.933 0L9.854 12.8 6.5 10.866a1 1 0 010-1.732l3.354-1.935 1.18-4.455A1 1 0 0112 2z" clip-rule="evenodd"></path></svg>
-                Top 10 Global
+                Top 10 Jagoan
             </h2>
             <a href="/leaderboard" class="text-mariner-600 hover:text-mariner-800 font-semibold flex items-center gap-1 transition-colors">
-                View Full Leaderboard <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                Lihat Semua Klasemen <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
             </a>
         </div>
 
@@ -38,7 +38,7 @@
             @if(isset($top2))
             <div class="flex flex-col items-center group w-1/4 sm:w-[150px] relative z-10 translate-y-8">
                 <div class="absolute -top-10 opacity-0 group-hover:-translate-y-2 group-hover:opacity-100 transition-all duration-300">
-                    <span class="px-3 py-1 bg-mariner-800 text-white rounded-full text-xs font-bold shadow-md">#2 Rank</span>
+                    <span class="px-3 py-1 bg-mariner-800 text-white rounded-full text-xs font-bold shadow-md">Juara 2</span>
                 </div>
                 <!-- Avatar -->
                 <div class="relative mb-4 shrink-0 transition-transform duration-500 group-hover:scale-110">
@@ -63,7 +63,7 @@
             @if(isset($top1))
             <div class="flex flex-col items-center group w-1/3 sm:w-[180px] relative z-20">
                 <div class="absolute -top-10 opacity-0 group-hover:-translate-y-2 group-hover:opacity-100 transition-all duration-300">
-                    <span class="px-3 py-1 bg-yellow-400 text-yellow-900 rounded-full text-xs font-bold shadow-md">Champion</span>
+                    <span class="px-3 py-1 bg-yellow-400 text-yellow-900 rounded-full text-xs font-bold shadow-md">Sang Juara</span>
                 </div>
                 <!-- Avatar -->
                 <div class="relative mb-4 shrink-0 transition-transform duration-500 group-hover:scale-110">
@@ -89,7 +89,7 @@
             @if(isset($top3))
             <div class="flex flex-col items-center group w-1/4 sm:w-[150px] relative z-10 translate-y-12">
                 <div class="absolute -top-10 opacity-0 group-hover:-translate-y-2 group-hover:opacity-100 transition-all duration-300">
-                    <span class="px-3 py-1 bg-mariner-800 text-white rounded-full text-xs font-bold shadow-md">#3 Rank</span>
+                    <span class="px-3 py-1 bg-mariner-800 text-white rounded-full text-xs font-bold shadow-md">Juara 3</span>
                 </div>
                 <!-- Avatar -->
                 <div class="relative mb-4 shrink-0 transition-transform duration-500 group-hover:scale-110">
@@ -114,7 +114,7 @@
         <!-- Rank 4 to 10 List -->
         <div class="max-w-3xl mx-auto flex flex-col gap-3 z-1 mt-[100px]">
             @foreach($ranks4_10 as $user)
-            <a href="/member/{{ $user->id }}" class="glass-panel p-4 rounded-xl flex items-center gap-4 transition-all duration-300 hover:bg-mariner-50 hover:-translate-y-1 hover:shadow-lg group cursor-pointer border border-mariner-100 hover:border-mariner-300">
+            <a href="/{{ $user->username }}" class="glass-panel p-4 rounded-xl flex items-center gap-4 transition-all duration-300 hover:bg-mariner-50 hover:-translate-y-1 hover:shadow-lg group cursor-pointer border border-mariner-100 hover:border-mariner-300">
                 <!-- Rank Number -->
                 <div class="w-10 text-center font-bold text-mariner-400 group-hover:text-mariner-600 transition-colors text-lg">
                     #{{ $user->rank }}
@@ -135,7 +135,7 @@
 
                 <!-- Score -->
                 <div class="text-right">
-                    <div class="text-lg font-black text-mariner-600 tabular-nums tracking-tight">{{ number_format($user->points) }} <span class="text-[10px] text-mariner-400 uppercase tracking-widest block -mt-1 font-bold">PTS</span></div>
+                    <div class="text-lg font-black text-mariner-600 tabular-nums tracking-tight">{{ number_format($user->points) }} <span class="text-[10px] text-mariner-400 uppercase tracking-widest block -mt-1 font-bold">POIN</span></div>
                 </div>
             </a>
             @endforeach
@@ -145,9 +145,9 @@
     <!-- Section: Classes Preview -->
     <section class="mb-24">
         <div class="flex items-center justify-between mb-8">
-            <h2 class="text-3xl font-bold text-mariner-900">Available Classes</h2>
+            <h2 class="text-3xl font-bold text-mariner-900">Kelas Seru Nih</h2>
             <a href="/class" class="text-mariner-600 hover:text-mariner-800 font-semibold flex items-center gap-1 transition-colors">
-                View All <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                Lihat Semua <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
             </a>
         </div>
         
@@ -169,9 +169,9 @@
     <!-- Section: Mentors Preview -->
     <section class="mb-24">
         <div class="flex items-center justify-between mb-8">
-            <h2 class="text-3xl font-bold text-mariner-900">Meet Our Mentors</h2>
+            <h2 class="text-3xl font-bold text-mariner-900">Kenalan Sama Mentor Yuk</h2>
             <a href="/mentor" class="text-mariner-600 hover:text-mariner-800 font-semibold flex items-center gap-1 transition-colors">
-                View All <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                Lihat Semua <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
             </a>
         </div>
 
@@ -181,7 +181,7 @@
                 <img src="{{ $mentor->avatar }}" alt="{{ $mentor->name }}" class="w-20 h-20 rounded-full border-2 border-mariner-200 mb-4 group-hover:border-mariner-500 transition-colors shadow-md object-cover">
                 <h3 class="text-lg font-bold text-mariner-900 mb-1 group-hover:text-mariner-600 transition-colors leading-tight">{{ $mentor->name }}</h3>
                 <span class="text-[10px] font-mono bg-mariner-50 text-mariner-600 px-2 py-0.5 rounded border border-mariner-200 mb-3 font-semibold">{{ $mentor->nim }}</span>
-                <p class="text-xs font-bold text-mariner-500 uppercase tracking-wider">{{ $mentor->classes_count }} Classes</p>
+                <p class="text-xs font-bold text-mariner-500 uppercase tracking-wider">{{ $mentor->classes_count }} Kelas</p>
             </a>
             @endforeach
         </div>
@@ -204,14 +204,14 @@
                 </div>
             </div>
             
-            <h2 class="text-3xl md:text-4xl font-extrabold text-white mb-4 tracking-tight drop-shadow-sm">Stay Connected!</h2>
+            <h2 class="text-3xl md:text-4xl font-extrabold text-white mb-4 tracking-tight drop-shadow-sm">Jangan Sampai Ketinggalan!</h2>
             <p class="text-lg md:text-xl text-mariner-50 max-w-2xl mb-8 leading-relaxed font-semibold">
                 Lihat dan ikuti keseruan kami dengan mengunjungi instagram dengan tagar <br class="hidden md:block">
                 <span class="text-white font-black tracking-wide underline decoration-mariner-300 decoration-4 underline-offset-4">#DNCCUpSkill2026</span>
             </p>
             
             <a href="https://instagram.com/dnccsemarang" target="_blank" rel="noopener noreferrer" class="px-8 py-4 rounded-full bg-white text-mariner-700 font-extrabold text-lg shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-105 hover:bg-mariner-50 border border-mariner-100 flex items-center gap-2">
-                Follow @dnccsemarang
+                Cuss Follow @dnccsemarang
                 <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
             </a>
         </div>

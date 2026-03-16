@@ -13,9 +13,9 @@
     <div class="flex flex-col md:flex-row justify-between items-center mb-12 gap-6 relative z-10">
         <div class="text-center md:text-left z-10">
             <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight text-mariner-950 mb-2 drop-shadow-sm">
-                Available <span class="bg-clip-text text-transparent bg-gradient-to-r from-mariner-500 to-mariner-800">Classes</span>
+                Pilihan <span class="bg-clip-text text-transparent bg-gradient-to-r from-mariner-500 to-mariner-800">Kelas</span>
             </h1>
-            <p class="text-mariner-600 font-medium text-sm md:text-base max-w-xl">Explore our curated learning paths and join the classes that match your interests to earn points and climb the ranks.</p>
+            <p class="text-mariner-600 font-medium text-sm md:text-base max-w-xl">Jelajahi berbagai kelas asik pilihan kita, ikutin yang paling pas buat kamu, terus kumpulin poin dan menangkan hadiah eksklusif dari DNCC!</p>
         </div>
         
 
@@ -65,7 +65,7 @@
 
                 <!-- Hover join button effect -->
                 <button class="w-full mt-5 py-2.5 rounded-xl bg-mariner-50 border border-mariner-200 text-mariner-700 font-extrabold flex items-center justify-center gap-2 group-hover:bg-mariner-500 group-hover:text-white group-hover:border-mariner-400 group-hover:shadow-[0_8px_20px_rgba(6,132,255,0.3)] transition-all duration-300">
-                    View Details
+                    Lihat Detail
                     <svg class="w-4 h-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                 </button>
             </div>
@@ -73,8 +73,8 @@
         @empty
         <div class="col-span-1 md:col-span-2 lg:col-span-3 glass-panel rounded-2xl p-16 text-center border-dashed border-2 border-mariner-200 bg-white shadow-sm">
             <svg class="w-16 h-16 text-mariner-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
-            <h3 class="text-xl font-bold text-mariner-900 mb-2">No Classes Found</h3>
-            <p class="text-mariner-500 font-medium max-w-sm mx-auto">There are currently no classes available in this category. Check back later!</p>
+            <h3 class="text-xl font-bold text-mariner-900 mb-2">Yah, Kelasnya Kosong</h3>
+            <p class="text-mariner-500 font-medium max-w-sm mx-auto">Masih nungguin kelas seru buka? Cek lagi nanti ya buat update terbarunya!</p>
         </div>
         @endforelse
     </div>

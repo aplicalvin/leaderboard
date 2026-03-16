@@ -58,9 +58,9 @@
             
             <div class="text-center md:text-left z-10">
                 <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight text-mariner-950 mb-2 flex items-center justify-center md:justify-start gap-3 drop-shadow-sm">
-                    <span class="bg-clip-text text-transparent bg-gradient-to-r from-mariner-500 to-mariner-800">Leaderboard</span>
+                    <span class="bg-clip-text text-transparent bg-gradient-to-r from-mariner-500 to-mariner-800">Klasemen Poin</span>
                 </h1>
-                <p class="text-mariner-600 text-sm md:text-base font-medium">Discover the top performers of the season.</p>
+                <p class="text-mariner-600 text-sm md:text-base font-medium">Yuk, intip siapa aja yang jadi jagoan musim ini!</p>
             </div>
 
 
@@ -74,8 +74,8 @@
                     <div class="w-24 h-24 mb-6 rounded-full glass-panel flex items-center justify-center text-mariner-400 bg-white">
                         <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"></path></svg>
                     </div>
-                    <h2 class="text-2xl font-bold text-mariner-900 mb-2">No Leaders Yet</h2>
-                    <p class="text-mariner-500 max-w-sm">The arena is empty. Start participating to claim your spot on the podium!</p>
+                    <h2 class="text-2xl font-bold text-mariner-900 mb-2">Belum Ada Jagoan</h2>
+                    <p class="text-mariner-500 max-w-sm">Arena masih sepi nih. Ayo ikutan kelas dan pamerin namamu di puncak klasemen!</p>
                 </div>
             </div>
         @else
@@ -86,7 +86,7 @@
             @if($top2)
             <div class="flex flex-col items-center group w-1/4 sm:w-[150px] relative z-10 translate-y-8">
                 <div class="absolute -top-10 opacity-0 group-hover:-translate-y-2 group-hover:opacity-100 transition-all duration-300">
-                    <span class="px-3 py-1 bg-mariner-800 text-white rounded-full text-xs font-bold shadow-md">#2 Rank</span>
+                    <span class="px-3 py-1 bg-mariner-800 text-white rounded-full text-xs font-bold shadow-md">Juara 2</span>
                 </div>
                 <!-- Avatar -->
                 <div class="relative mb-4 shrink-0 transition-transform duration-500 group-hover:scale-110">
@@ -111,7 +111,7 @@
             @if($top1)
             <div class="flex flex-col items-center group w-1/3 sm:w-[180px] relative z-20">
                 <div class="absolute -top-10 opacity-0 group-hover:-translate-y-2 group-hover:opacity-100 transition-all duration-300">
-                    <span class="px-3 py-1 bg-yellow-400 text-yellow-900 rounded-full text-xs font-bold shadow-md">Champion</span>
+                    <span class="px-3 py-1 bg-yellow-400 text-yellow-900 rounded-full text-xs font-bold shadow-md">Sang Juara</span>
                 </div>
                 <!-- Avatar -->
                 <div class="relative mb-4 shrink-0 transition-transform duration-500 group-hover:scale-110">
@@ -137,7 +137,7 @@
             @if($top3)
             <div class="flex flex-col items-center group w-1/4 sm:w-[150px] relative z-10 translate-y-12">
                 <div class="absolute -top-10 opacity-0 group-hover:-translate-y-2 group-hover:opacity-100 transition-all duration-300">
-                    <span class="px-3 py-1 bg-mariner-800 text-white rounded-full text-xs font-bold shadow-md">#3 Rank</span>
+                    <span class="px-3 py-1 bg-mariner-800 text-white rounded-full text-xs font-bold shadow-md">Juara 3</span>
                 </div>
                 <!-- Avatar -->
                 <div class="relative mb-4 shrink-0 transition-transform duration-500 group-hover:scale-110">
@@ -166,7 +166,7 @@
                 <div class="absolute right-0 top-1/2 w-64 h-64 bg-blue-400/10 blur-[80px] rounded-full pointer-events-none transform -translate-y-1/2"></div>
                 
                 @foreach($others as $index => $user)
-                <a href="/member/{{ $user->id }}" class="glass-panel bg-white rounded-2xl p-4 md:p-5 flex items-center justify-between group hover:bg-mariner-50 border border-mariner-100 hover:border-mariner-300 transition-all duration-300 hover:scale-[1.01] hover:shadow-md cursor-pointer relative overflow-hidden">
+                <a href="/{{ $user->username }}" class="glass-panel bg-white rounded-2xl p-4 md:p-5 flex items-center justify-between group hover:bg-mariner-50 border border-mariner-100 hover:border-mariner-300 transition-all duration-300 hover:scale-[1.01] hover:shadow-md cursor-pointer relative overflow-hidden">
                     
                     <!-- Hover shine effect -->
                     <div class="absolute top-0 -left-[100%] w-1/2 h-full bg-gradient-to-r from-transparent via-white/40 to-transparent skew-x-[-20deg] group-hover:animate-[shine_1.5s_ease-in-out]"></div>
@@ -200,7 +200,7 @@
                         <div class="text-xl md:text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-mariner-500 to-mariner-800 drop-shadow-sm tabular-nums">
                             {{ number_format($user->points) }}
                         </div>
-                        <span class="text-[10px] md:text-xs text-mariner-400 font-bold tracking-wider uppercase mt-1">Points</span>
+                        <span class="text-[10px] md:text-xs text-mariner-400 font-bold tracking-wider uppercase mt-1">Poin</span>
                     </div>
                 </a>
                 @endforeach

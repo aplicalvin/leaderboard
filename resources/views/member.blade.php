@@ -9,9 +9,9 @@
     <header class="mb-10 text-center relative z-10">
         <div class="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-32 bg-mariner-200/50 rounded-full blur-[60px] -z-10 pointer-events-none"></div>
         <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight text-mariner-950 mb-3 drop-shadow-sm">
-            DNCC <span class="bg-clip-text text-transparent bg-gradient-to-r from-mariner-500 to-mariner-800">Members</span>
+            Anggota <span class="bg-clip-text text-transparent bg-gradient-to-r from-mariner-500 to-mariner-800">DNCC</span>
         </h1>
-        <p class="text-mariner-600 max-w-2xl mx-auto font-medium">Browse all registered members, their global ranks, and total scores.</p>
+        <p class="text-mariner-600 max-w-2xl mx-auto font-medium">Lihat semua anggota yang terdaftar, peringkat global mereka, dan total skornya.</p>
     </header>
 
     @php
@@ -26,20 +26,20 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
             </div>
-            <input type="text" class="block w-full pl-10 pr-3 py-3 border border-mariner-200 rounded-xl leading-5 bg-white text-mariner-900 placeholder-mariner-400 focus:outline-none focus:ring-2 focus:ring-mariner-400 focus:border-mariner-400 sm:text-sm transition-colors shadow-sm" placeholder="Search members by name or NIM...">
+            <input type="text" class="block w-full pl-10 pr-3 py-3 border border-mariner-200 rounded-xl leading-5 bg-white text-mariner-900 placeholder-mariner-400 focus:outline-none focus:ring-2 focus:ring-mariner-400 focus:border-mariner-400 sm:text-sm transition-colors shadow-sm" placeholder="Cari anggota lewat nama atau NIM...">
         </div>
         <button class="shrink-0 px-6 py-3 bg-white border border-mariner-200 rounded-xl text-mariner-700 font-bold hover:bg-mariner-50 hover:border-mariner-300 transition-colors flex items-center justify-center gap-2 shadow-sm">
             <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12" />
             </svg>
-            Sort by Rank
+            Urutkan Peringkat
         </button>
     </div>
 
     <!-- Member Grid -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 relative z-10">
         @forelse($users as $user)
-        <a href="/member/{{ $user->id }}" class="glass-panel bg-white rounded-2xl p-5 flex items-center gap-4 transition-all duration-300 hover:bg-mariner-50 hover:-translate-y-1 hover:shadow-md border border-mariner-100 hover:border-mariner-300 group shadow-sm">
+        <a href="/{{ $user->username }}" class="glass-panel bg-white rounded-2xl p-5 flex items-center gap-4 transition-all duration-300 hover:bg-mariner-50 hover:-translate-y-1 hover:shadow-md border border-mariner-100 hover:border-mariner-300 group shadow-sm">
             
             <!-- Rank Indicator -->
             <div class="w-12 h-12 shrink-0 rounded-xl bg-gradient-to-br from-mariner-50 to-mariner-100 border border-mariner-200 flex items-center justify-center font-black text-xl {{ $user->rank <= 3 ? 'text-transparent bg-clip-text bg-gradient-to-br from-yellow-500 to-amber-700' : 'text-mariner-500 group-hover:text-mariner-700 transition-colors' }}">
@@ -68,7 +68,7 @@
                 <div class="text-xl font-black text-mariner-600 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-mariner-500 group-hover:to-mariner-800 transition-all duration-300 tabular-nums">
                     {{ number_format($user->points) }}
                 </div>
-                <span class="text-[10px] text-mariner-400 font-bold uppercase tracking-widest group-hover:text-mariner-500 transition-colors">Pts</span>
+                <span class="text-[10px] text-mariner-400 font-bold uppercase tracking-widest group-hover:text-mariner-500 transition-colors">Poin</span>
             </div>
             
             <!-- Link Arrow -->
@@ -78,7 +78,7 @@
         </a>
         @empty
         <div class="col-span-1 md:col-span-2 glass-panel rounded-2xl p-12 text-center border-dashed border-2 border-mariner-200">
-            <p class="text-mariner-500 font-bold">No members found.</p>
+            <p class="text-mariner-500 font-bold">Belum ada anggota nih.</p>
         </div>
         @endforelse
     </div>

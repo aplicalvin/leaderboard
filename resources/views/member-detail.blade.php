@@ -24,7 +24,7 @@
                 <h1 class="text-4xl md:text-5xl font-black text-mariner-950 mb-2 drop-shadow-sm tracking-tight">{{ $member->name }}</h1>
                 <div class="inline-flex items-center gap-2 mb-4">
                     <span class="px-4 py-1.5 rounded-full bg-mariner-100 text-mariner-800 text-sm font-bold tracking-wide border border-mariner-200 font-mono shadow-sm">NIM: {{ $member->nim }}</span>
-                    <span class="px-4 py-1.5 rounded-full bg-mariner-50 text-mariner-600 text-sm font-extrabold tracking-wide border border-mariner-200 shadow-sm">Member</span>
+                    <span class="px-4 py-1.5 rounded-full bg-mariner-50 text-mariner-600 text-sm font-extrabold tracking-wide border border-mariner-200 shadow-sm">Anggota</span>
                 </div>
             </div>
 
@@ -34,7 +34,7 @@
                 <div class="bg-mariner-50 border border-mariner-200 rounded-2xl p-6 text-center transform transition-all duration-300 hover:-translate-y-2 hover:shadow-md relative overflow-hidden group min-w-[140px] shadow-sm">
                     <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full group-hover:animate-[shine_1.5s_ease-in-out]"></div>
                     <div class="text-5xl mb-2 flex justify-center drop-shadow-sm transform transition-transform group-hover:scale-110">👑</div>
-                    <div class="text-mariner-500 text-sm font-bold uppercase tracking-widest mb-1">Global Rank</div>
+                    <div class="text-mariner-500 text-sm font-bold uppercase tracking-widest mb-1">Peringkat Global</div>
                     <div class="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-mariner-500 to-mariner-800 tabular-nums">
                         #{{ $member->rank }}
                     </div>
@@ -44,7 +44,7 @@
                 <div class="bg-white border border-mariner-200 rounded-2xl p-6 text-center transform transition-all duration-300 hover:-translate-y-2 hover:shadow-md relative overflow-hidden group min-w-[140px] shadow-sm flex flex-col items-center justify-center">
                     <div class="absolute inset-0 bg-gradient-to-r from-transparent via-mariner-50/50 to-transparent -translate-x-full group-hover:animate-[shine_1.5s_ease-in-out]"></div>
                     <div class="text-5xl mb-2 flex justify-center drop-shadow-sm transform transition-transform group-hover:scale-110">🏆</div>
-                    <div class="text-mariner-500 text-sm font-bold uppercase tracking-widest mb-1">Total Score</div>
+                    <div class="text-mariner-500 text-sm font-bold uppercase tracking-widest mb-1">Total Skor</div>
                     <div class="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-yellow-500 to-amber-600 drop-shadow-sm tabular-nums">
                         {{ number_format($member->points) }}
                     </div>
@@ -62,7 +62,7 @@
                 <div class="p-2 bg-mariner-100 rounded-lg text-mariner-600 shadow-sm border border-mariner-200">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
                 </div>
-                <h2 class="text-2xl font-bold text-mariner-900 tracking-tight">Enrolled Classes</h2>
+                <h2 class="text-2xl font-bold text-mariner-900 tracking-tight">Kelas Yang Diikutin</h2>
             </div>
             
             <div class="space-y-4">
@@ -82,7 +82,7 @@
                 </div>
                 @empty
                 <div class="glass-panel bg-white rounded-2xl p-8 text-center border-dashed border-2 border-mariner-200">
-                    <p class="text-mariner-500 font-bold">Not enrolled in any classes yet.</p>
+                    <p class="text-mariner-500 font-bold">Belum ikutan kelas apa-apa nih.</p>
                 </div>
                 @endforelse
             </div>
@@ -94,7 +94,7 @@
                 <div class="p-2 bg-mariner-100 rounded-lg text-mariner-600 shadow-sm border border-mariner-200">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
                 </div>
-                <h2 class="text-2xl font-bold text-mariner-900 tracking-tight">Point History</h2>
+                <h2 class="text-2xl font-bold text-mariner-900 tracking-tight">Riwayat Poin</h2>
             </div>
             
             <div class="glass-panel bg-white rounded-2xl p-6 border border-mariner-100 relative overflow-hidden shadow-sm">
@@ -109,13 +109,13 @@
                                 <svg class="w-5 h-5 transition-transform group-hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
                             </div>
                             <div>
-                                <h4 class="text-mariner-900 font-bold group-hover:text-mariner-600 transition-colors">{{ $history->task->title ?? 'Manual Points' }}</h4>
+                                <h4 class="text-mariner-900 font-bold group-hover:text-mariner-600 transition-colors">{{ $history->task->title ?? 'Tambahan Poin' }}</h4>
                                 <p class="text-xs text-mariner-500 mt-1 font-semibold">{{ $history->created_at->diffForHumans() }}</p>
                             </div>
                         </div>
                         <div class="text-right">
                             <span class="text-lg font-black text-mariner-500 group-hover:scale-110 inline-block transition-transform">+{{ number_format($history->points) }}</span>
-                            <span class="text-[10px] text-mariner-400 font-bold uppercase tracking-wider block mt-0.5">pts</span>
+                            <span class="text-[10px] text-mariner-400 font-bold uppercase tracking-wider block mt-0.5">poin</span>
                         </div>
                     </div>
                     @empty
@@ -123,7 +123,7 @@
                         <div class="w-16 h-16 bg-mariner-100 rounded-full flex items-center justify-center mx-auto mb-4 text-mariner-400">
                             <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
                         </div>
-                        <p class="text-mariner-500 font-bold text-sm">No points history available.</p>
+                        <p class="text-mariner-500 font-bold text-sm">Belum ada riwayat poin nih.</p>
                     </div>
                     @endforelse
                 </div>

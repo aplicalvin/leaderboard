@@ -13,9 +13,9 @@
     <header class="mb-12 text-center md:text-left flex flex-col md:flex-row justify-between items-center gap-6 relative z-10">
         <div>
             <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight text-mariner-950 mb-3 drop-shadow-sm">
-                Expert <span class="bg-clip-text text-transparent bg-gradient-to-r from-mariner-500 to-mariner-800">Mentors</span>
+                Kakak <span class="bg-clip-text text-transparent bg-gradient-to-r from-mariner-500 to-mariner-800">Mentor</span>
             </h1>
-            <p class="text-mariner-600 font-medium max-w-2xl text-sm md:text-base">Connect with our experienced mentors to guide you through your learning journey in Networking and Infrastructure.</p>
+            <p class="text-mariner-600 font-medium max-w-2xl text-sm md:text-base">Kenalan dan belajar bareng Kakak Mentor kece yang bakal bimbing kamu selama di DNCC.</p>
         </div>
     </header>
 
@@ -47,21 +47,21 @@
                         <div class="w-8 h-8 rounded-full bg-mariner-100 text-mariner-600 flex items-center justify-center border border-mariner-200">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
                         </div>
-                        <span class="text-sm font-bold text-mariner-900">Active Classes</span>
+                        <span class="text-sm font-bold text-mariner-900">Kelas Aktif</span>
                     </div>
                     <div class="text-2xl font-black text-mariner-600">{{ $mentor->classes_count }}</div>
                 </div>
 
                 <!-- Action Button -->
                 <a href="/mentor/{{ $mentor->id }}" class="w-full block text-center py-3 rounded-xl border border-mariner-200 bg-mariner-50 text-mariner-700 font-extrabold text-sm tracking-wide transition-all duration-300 hover:bg-mariner-500 hover:text-white hover:border-mariner-400 hover:shadow-[0_8px_20px_rgba(6,132,255,0.25)]">
-                    View Profile
+                    Lihat Profil
                 </a>
             </div>
         </div>
         @empty
         <div class="col-span-1 md:col-span-2 lg:col-span-3 glass-panel rounded-2xl p-16 text-center border-dashed border-2 border-mariner-200 bg-white">
-            <h3 class="text-xl font-bold text-mariner-900 mb-2">No Mentors Found</h3>
-            <p class="text-mariner-500 font-medium max-w-sm mx-auto">We couldn't find any mentors matching your criteria.</p>
+            <h3 class="text-xl font-bold text-mariner-900 mb-2">Yah, Belum Ada Mentor</h3>
+            <p class="text-mariner-500 font-medium max-w-sm mx-auto">Kita belum nemu mentor yang pas kriteria kamu nih.</p>
         </div>
         @endforelse
     </div>

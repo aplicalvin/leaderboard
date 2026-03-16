@@ -13,6 +13,8 @@
 <link href="https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <!-- Tailwind CSS (CDN as requested) -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- html2canvas for Image Export -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script>
         tailwind.config = {
             darkMode: 'class',

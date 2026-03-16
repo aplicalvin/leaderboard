@@ -12,9 +12,9 @@
             <!-- Navigation Links -->
             <div class="hidden md:block">
                 <div class="ml-10 flex items-baseline space-x-8">
-                    <a href="/leaderboard" class="{{ request()->is('leaderboard') ? 'text-mariner-700 font-bold' : 'text-mariner-500 font-medium' }} hover:text-mariner-800 px-3 py-2 rounded-md transition-colors">Leaderboard</a>
-                    <a href="/class" class="{{ request()->is('class') ? 'text-mariner-700 font-bold' : 'text-mariner-500 font-medium' }} hover:text-mariner-800 px-3 py-2 rounded-md transition-colors">Class</a>
-                    <a href="/member" class="{{ request()->is('member') ? 'text-mariner-700 font-bold' : 'text-mariner-500 font-medium' }} hover:text-mariner-800 px-3 py-2 rounded-md transition-colors">Member</a>
+                    <a href="/leaderboard" class="{{ request()->is('leaderboard') ? 'text-mariner-700 font-bold' : 'text-mariner-500 font-medium' }} hover:text-mariner-800 px-3 py-2 rounded-md transition-colors">Klasemen</a>
+                    <a href="/class" class="{{ request()->is('class') ? 'text-mariner-700 font-bold' : 'text-mariner-500 font-medium' }} hover:text-mariner-800 px-3 py-2 rounded-md transition-colors">Kelas</a>
+                    <a href="/member" class="{{ request()->is('member') ? 'text-mariner-700 font-bold' : 'text-mariner-500 font-medium' }} hover:text-mariner-800 px-3 py-2 rounded-md transition-colors">Anggota</a>
                     <a href="/mentor" class="{{ request()->is('mentor') ? 'text-mariner-700 font-bold' : 'text-mariner-500 font-medium' }} hover:text-mariner-800 px-3 py-2 rounded-md transition-colors">Mentor</a>
                 </div>
             </div>
@@ -23,7 +23,7 @@
             <div>
                 <a href="/admin" class="relative group inline-flex items-center justify-center px-6 py-2 text-sm font-bold text-white transition-all duration-200 outline-none focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-mariner-400 rounded-full bg-mariner-600 hover:bg-mariner-700 shadow-md hover:shadow-lg hover:-translate-y-0.5 border border-mariner-500 overflow-hidden">
                     <span class="absolute inset-0 w-full h-full -mt-1 rounded-lg opacity-30 bg-gradient-to-b from-transparent via-transparent to-black"></span>
-                    <span class="relative">Login</span>
+                    <span class="relative">Masuk Yuk!</span>
                 </a>
             </div>
             

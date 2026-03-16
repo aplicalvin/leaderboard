@@ -28,12 +28,13 @@ class MemberController extends Controller
         return view('member', compact('users'));
     }
 
-    public function show($id)
+    public function show($username)
     {
         $member = User::role('member')
+            ->where('username', $username)
             ->with(['joinedClasses.mentor', 'scoreLogs.task.class'])
             ->withSum('scoreLogs', 'points')
-            ->findOrFail($id);
+            ->firstOrFail();
 
         $member->points = $member->score_logs_sum_points ?? 0;
         $member->avatar = self::getAvatarUrl($member->nim, $member->name);
