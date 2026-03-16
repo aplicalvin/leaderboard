@@ -1,91 +1,48 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Leaderboard - DNCC</title>
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=inter:400,600,700,800&display=swap" rel="stylesheet" />
-    <!-- Tailwind CSS (CDN as requested) -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    },
-                    colors: {
-                        'neon-blue': '#00f3ff',
-                        'neon-purple': '#b537f2',
-                        'deep-navy': '#030712',
-                        'glass-bg': 'rgba(255, 255, 255, 0.03)',
-                        'glass-border': 'rgba(255, 255, 255, 0.1)',
-                    },
-                    backgroundImage: {
-                        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-                        'podium-1': 'linear-gradient(180deg, rgba(234, 179, 8, 0.3) 0%, rgba(234, 179, 8, 0) 100%)',
-                        'podium-2': 'linear-gradient(180deg, rgba(148, 163, 184, 0.3) 0%, rgba(148, 163, 184, 0) 100%)',
-                        'podium-3': 'linear-gradient(180deg, rgba(217, 119, 6, 0.3) 0%, rgba(217, 119, 6, 0) 100%)',
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        body {
-            background-color: #030712;
-            background-image: 
-                radial-gradient(circle at 15% 50%, rgba(0, 243, 255, 0.08), transparent 25%),
-                radial-gradient(circle at 85% 30%, rgba(181, 55, 242, 0.08), transparent 25%);
-            color: #f3f4f6;
-            min-height: 100vh;
-        }
+@extends('layouts.app')
 
-        /* Glassmorphism utility */
-        .glass-panel {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-        }
+@section('title', 'Leaderboard - DNCC')
 
-        /* 3D Podium Effect */
-        .podium-block {
-            position: relative;
-            box-shadow: 
-                inset 0 1px 1px rgba(255,255,255,0.1),
-                0 -2px 10px rgba(0,0,0,0.5),
-                0 -10px 20px -5px var(--glow-color, rgba(0,0,0,0));
-            transition: transform 0.3s ease, var(--glow-color) 0.3s ease;
-        }
-        
-        /* Floating animation for crown/medal */
-        .floating {
-            animation: float 3s ease-in-out infinite;
-        }
+@push('styles')
+<style>
+    /* 3D Podium Effect */
+    .podium-block {
+        position: relative;
+        box-shadow: 
+            inset 0 1px 1px rgba(255,255,255,0.1),
+            0 -2px 10px rgba(0,0,0,0.5),
+            0 -10px 20px -5px var(--glow-color, rgba(0,0,0,0));
+        transition: transform 0.3s ease, var(--glow-color) 0.3s ease;
+    }
+    
+    /* Floating animation for crown/medal */
+    .floating {
+        animation: float 3s ease-in-out infinite;
+    }
 
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-8px); }
-            100% { transform: translateY(0px); }
-        }
+    @keyframes float {
+        0% { transform: translateY(0px); }
+        50% { transform: translateY(-8px); }
+        100% { transform: translateY(0px); }
+    }
 
-        /* Glowing text/borders */
-        .glow-text {
-            text-shadow: 0 0 10px currentColor;
-        }
-        
-        .avatar-glow-1 { box-shadow: 0 0 15px rgba(234, 179, 8, 0.5); border-color: #eab308; }
-        .avatar-glow-2 { box-shadow: 0 0 15px rgba(148, 163, 184, 0.5); border-color: #94a3b8; }
-        .avatar-glow-3 { box-shadow: 0 0 15px rgba(217, 119, 6, 0.5); border-color: #d97706; }
-        .avatar-glow-default { box-shadow: 0 0 10px rgba(0, 243, 255, 0.2); border-color: rgba(255,255,255,0.2); }
-    </style>
-</head>
-<body class="antialiased font-sans pb-12 selection:bg-neon-purple selection:text-white flex justify-center">
+    /* Glowing text/borders */
+    .glow-text {
+        text-shadow: 0 0 10px currentColor;
+    }
+    
+    .avatar-glow-1 { box-shadow: 0 0 15px rgba(234, 179, 8, 0.5); border-color: #eab308; }
+    .avatar-glow-2 { box-shadow: 0 0 15px rgba(148, 163, 184, 0.5); border-color: #94a3b8; }
+    .avatar-glow-3 { box-shadow: 0 0 15px rgba(217, 119, 6, 0.5); border-color: #d97706; }
+    .avatar-glow-default { box-shadow: 0 0 10px rgba(0, 243, 255, 0.2); border-color: rgba(255,255,255,0.2); }
+
+    /* Global Shine Animation Definition */
+    @keyframes shine {
+        100% { left: 200%; }
+    }
+</style>
+@endpush
+
+@section('content')
 
     @php
         // Dummy Data Setup
@@ -305,11 +262,4 @@
         
     </main>
 
-    <!-- Global Shine Animation Definition -->
-    <style>
-        @keyframes shine {
-            100% { left: 200%; }
-        }
-    </style>
-</body>
-</html>
+@endsection
