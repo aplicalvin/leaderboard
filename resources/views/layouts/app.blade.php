@@ -54,37 +54,23 @@
     </script>
     <style>
         body {
-            /* Fallback for pages that still use the dark theme */
-            background-color: #030712;
-            color: #f3f4f6;
+            background-color: #edf9ff; /* mariner-50 */
+            color: #0e2e5d; /* mariner-950 */
             min-height: 100vh;
         }
 
-        /* Specific to the light theme page (if .theme-light is added to body/wrapper) */
-        .theme-light {
-            background-color: #edf9ff; /* mariner-50 */
-            color: #0e2e5d; /* mariner-950 */
-            background-image: none; /* remove dark theme glows */
-        }
-        
-        .theme-dark {
-            background-image: 
-                radial-gradient(circle at 15% 50%, rgba(0, 243, 255, 0.08), transparent 25%),
-                radial-gradient(circle at 85% 30%, rgba(181, 55, 242, 0.08), transparent 25%);
-        }
-
-        /* Common Glassmorphism utility */
+        /* Common Glassmorphism utility for light theme */
         .glass-panel {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(214, 240, 255, 0.5); /* mariner-100 */
+            box-shadow: 0 10px 30px rgba(6, 132, 255, 0.05); /* mariner-600 */
         }
     </style>
     @stack('styles')
 </head>
-<body class="antialiased font-sans flex flex-col min-h-screen selection:bg-mariner-500 selection:text-white theme-dark">
+<body class="antialiased font-sans flex flex-col min-h-screen selection:bg-mariner-500 selection:text-white">
 
     <!-- Navbar Component -->
     @include('components.navbar')
