@@ -15,6 +15,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Actions\Action;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -51,18 +52,22 @@ class TaskSubmissionsResource extends Resource
                     ->columnSpanFull(),
 
                 Select::make('status')
-                    ->options([
-                        'pending' => 'Pending',
-                        'approved' => 'Approved',
-                        'rejected' => 'Rejected',
-                    ])
-                    ->default('pending')
-                    ->required(),
+                    ->options(function ($record) {
 
-                Select::make('reviewed_by')
-                    ->label('Reviewer')
-                    ->options(User::pluck('full_name', 'id'))
-                    ->searchable(),
+                        if ($record && $record->status !== 'pending') {
+                            return [
+                                'approved' => 'Approved',
+                                'rejected' => 'Rejected',
+                            ];
+                        }
+
+                        return [
+                            'pending' => 'Pending',
+                            'approved' => 'Approved',
+                            'rejected' => 'Rejected',
+                        ];
+                    })
+                    ->required(),
 
                 DateTimePicker::make('submitted_at')
                     ->label('Submitted At'),

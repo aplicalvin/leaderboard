@@ -9,6 +9,7 @@ use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -31,19 +32,33 @@ class ScoreLogsResource extends Resource
     {
         return $table
             ->columns([
-                //
+                TextColumn::make('user.name')
+                    ->label('User')
+                    ->searchable(),
+
+                TextColumn::make('task.title')
+                    ->label('Task')
+                    ->searchable(),
+
+                TextColumn::make('points')
+                    ->label('Points')
+                    ->sortable(),
+
+                TextColumn::make('description')
+                    ->label('Description')
+                    ->wrap(),
+
+                TextColumn::make('source_type')
+                    ->label('Source'),
+
+                TextColumn::make('source_id')
+                    ->label('Source ID'),
             ])
-            ->filters([
-                //
-            ])
+            ->defaultSort('source_id', 'desc')
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\ViewAction::make(),
             ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
-            ]);
+            ->bulkActions([]);
     }
 
     public static function getRelations(): array
@@ -60,5 +75,10 @@ class ScoreLogsResource extends Resource
             'create' => Pages\CreateScoreLogs::route('/create'),
             'edit' => Pages\EditScoreLogs::route('/{record}/edit'),
         ];
+    }
+
+    public static function canCreate(): bool
+    {
+        return false;
     }
 }
