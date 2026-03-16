@@ -20,87 +20,144 @@
 @endphp
 
 <!-- HIDDEN IG STORY TEMPLATE -->
-<div id="ig-story-template" class="fixed -left-[9999px] top-0 flex flex-col items-center justify-between p-16 overflow-hidden" style="width:1080px;height:1920px;background:#030712;font-family:'Outfit', 'PT Sans', sans-serif;">
-    
-    <!-- Ambiance / Blobs -->
-    <div class="absolute top-[-10%] left-[-20%] w-[800px] h-[800px] bg-[#0684ff] rounded-full mix-blend-screen filter blur-[150px] opacity-60"></div>
-    <div class="absolute top-[20%] right-[-20%] w-[600px] h-[600px] bg-[#b537f2] rounded-full mix-blend-screen filter blur-[150px] opacity-40"></div>
-    <div class="absolute bottom-[-10%] left-[10%] w-[700px] h-[700px] bg-[#00f3ff] rounded-full mix-blend-screen filter blur-[150px] opacity-30"></div>
+<div id="ig-story-template"
+class="fixed -left-[9999px] top-0 flex flex-col items-center justify-between overflow-hidden"
+style="
+width:1080px;
+height:1920px;
+background: radial-gradient(circle at top,#0f172a,#020617);
+font-family:'Outfit','PT Sans',sans-serif;
+padding:140px 90px;
+">
 
-    <!-- Top Branding -->
-    <div class="relative z-10 w-full flex flex-col items-center mt-24">
-        <div class="px-8 py-3 bg-white/10 backdrop-blur-md rounded-full border border-white/20 shadow-xl mb-6">
-            <span class="text-[2rem] font-bold text-white tracking-[0.2em] uppercase">2026 Season</span>
-        </div>
-        <h2 class="text-[5.5rem] font-black text-transparent bg-clip-text bg-gradient-to-r from-white to-[#b5e7ff] tracking-tight leading-[1.1] drop-shadow-lg text-center">
-            My DNCC<br/>Leaderboard Score
-        </h2>
-    </div>
+<!-- ambient gradient -->
+<div class="absolute top-[-200px] left-[-200px] w-[700px] h-[700px] bg-blue-500/40 rounded-full blur-[200px]"></div>
+<div class="absolute bottom-[-200px] right-[-200px] w-[600px] h-[600px] bg-purple-500/40 rounded-full blur-[200px]"></div>
 
-    <!-- Main Glass Card -->
-    <div class="relative z-10 w-full max-w-[900px] bg-white/10 backdrop-blur-2xl rounded-[3rem] border-2 border-white/20 shadow-[0_40px_100px_rgba(0,0,0,0.5)] flex flex-col items-center p-20 my-auto">
-        
-        <!-- Avatar Area -->
-        <div class="relative mb-12">
-            <!-- Glow ring -->
-            <div class="absolute inset-0 rounded-full blur-[30px] opacity-100 bg-gradient-to-tr from-[#00f3ff] via-[#0684ff] to-[#b537f2] animate-pulse"></div>
-            <!-- Avatar image -->
-            <div class="relative w-[380px] h-[380px] rounded-full p-[8px] bg-gradient-to-tr from-[#00f3ff] via-[#0684ff] to-[#b537f2]">
-                <div class="w-full h-full rounded-full overflow-hidden bg-[#0e2e5d] border-[8px] border-[#030712]">
-                    <!-- Using base64 directly prevents html2canvas CORS issues -->
-                    <img src="{{ $avatarBase64 }}" alt="{{ $member->name }}" class="w-full h-full object-cover">
-                </div>
-            </div>
-        </div>
 
-        <!-- Name & Badge -->
-        <h1 class="text-[5.5rem] font-black text-white text-center leading-[1.1] mb-6 drop-shadow-md">
-            {{ $member->name }}
-        </h1>
-        <div class="text-[2.5rem] font-bold text-[#b5e7ff] bg-[#0684ff]/30 px-10 py-4 rounded-full border border-[#0684ff]/50 shadow-inner mb-16">
-            {{ $member->nim }}
-        </div>
+<!-- HEADER -->
+<div class="relative z-10 text-center">
 
-        <!-- Stats Grid -->
-        <div class="flex w-full gap-8 mt-4">
-            <!-- Rank Stat -->
-            <div class="flex-1 bg-gradient-to-b from-white/10 to-transparent rounded-[2.5rem] p-12 text-center border border-white/10 shadow-lg relative overflow-hidden flex flex-col items-center justify-center">
-                <div class="absolute inset-0 bg-gradient-to-tr from-yellow-500/10 to-transparent"></div>
-                <div class="relative z-10 flex flex-col items-center">
-                    <div class="text-[6rem] mb-6 drop-shadow-[0_0_30px_rgba(255,215,0,0.6)]">👑</div>
-                    <div class="text-[2.2rem] text-[#b5e7ff] font-bold uppercase tracking-widest mb-2 opacity-90">Global Rank</div>
-                    <div class="text-[8rem] font-black leading-none text-white drop-shadow-lg">
-                        #{{ $member->rank }}
-                    </div>
-                </div>
-            </div>
+<div class="text-[28px] tracking-[0.35em] uppercase text-blue-300 mb-6 font-bold">
+DNCC 2026
+</div>
 
-            <!-- Score Stat -->
-            <div class="flex-1 bg-gradient-to-b from-white/10 to-transparent rounded-[2.5rem] p-12 text-center border border-white/10 shadow-lg relative overflow-hidden flex flex-col items-center justify-center">
-                <div class="absolute inset-0 bg-gradient-to-tr from-orange-500/10 to-transparent"></div>
-                <div class="relative z-10 flex flex-col items-center">
-                    <div class="text-[6rem] mb-6 drop-shadow-[0_0_30px_rgba(255,165,0,0.6)]">🏆</div>
-                    <div class="text-[2.2rem] text-[#b5e7ff] font-bold uppercase tracking-widest mb-2 opacity-90">Total Poin</div>
-                    <div class="text-[8rem] font-black leading-none text-transparent bg-clip-text bg-gradient-to-b from-[#ffea00] to-[#ff7b00] drop-shadow-md">
-                        {{ number_format($member->points) }}
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+<h2 class="text-[82px] font-black text-white leading-tight">
+Leaderboard<br>
+Score
+</h2>
 
-    <!-- Footer Branding -->
-    <div class="relative z-10 text-center mb-16 mt-8 flex flex-col items-center gap-4">
-        <div class="w-16 h-1 bg-white/30 rounded-full mb-4"></div>
-        <p class="text-[3rem] font-black text-white tracking-widest flex items-center gap-4 drop-shadow-md">
-            DNCC
-            <span class="text-[#0684ff] font-light">|</span>
-            LEADERBOARD
-        </p>
-        <p class="text-[2.2rem] font-bold text-[#b5e7ff]/70 tracking-wider">
-            leaderboard.dncc.co.id
-        </p>
-    </div>
+</div>
+
+
+
+<!-- CARD -->
+<div class="relative z-10 w-full max-w-[820px]
+bg-white/8 backdrop-blur-xl
+border border-white/10
+rounded-[50px]
+shadow-2xl
+flex flex-col items-center
+px-16 py-20">
+
+<!-- AVATAR -->
+<div class="relative mb-12">
+
+<div class="absolute inset-0 rounded-full
+bg-gradient-to-r from-cyan-400 to-blue-500
+blur-[30px] opacity-70">
+</div>
+
+<div class="relative
+w-[320px] h-[320px]
+rounded-full
+p-[6px]
+bg-gradient-to-r from-cyan-400 to-blue-500">
+
+<div class="w-full h-full rounded-full overflow-hidden border-[8px] border-[#020617]">
+<img src="{{ $avatarBase64 }}" class="w-full h-full object-cover">
+</div>
+
+</div>
+</div>
+
+
+<!-- NAME -->
+<h1 class="text-[72px] font-black text-white text-center mb-4">
+{{ $member->name }}
+</h1>
+
+<div class="text-[28px] text-blue-200 font-bold mb-14 tracking-widest">
+{{ $member->nim }}
+</div>
+
+
+<!-- STATS -->
+<div class="flex gap-8 w-full">
+
+<!-- RANK -->
+<div class="flex-1
+bg-white/5
+border border-white/10
+rounded-[28px]
+p-10
+text-center">
+
+<div class="text-[20px] uppercase tracking-widest text-blue-300 mb-2">
+Rank
+</div>
+
+<div class="text-[90px] font-black text-white">
+#{{ $member->rank }}
+</div>
+
+</div>
+
+
+<!-- SCORE -->
+<div class="flex-1
+bg-white/5
+border border-white/10
+rounded-[28px]
+p-10
+text-center">
+
+<div class="text-[20px] uppercase tracking-widest text-blue-300 mb-2">
+Points
+</div>
+
+<div class="text-[90px] font-black
+text-transparent
+bg-clip-text
+bg-gradient-to-b
+from-yellow-300
+to-orange-500">
+
+{{ number_format($member->points) }}
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<!-- FOOTER -->
+<div class="relative z-10 text-center">
+
+<div class="text-[34px] font-bold text-white tracking-widest">
+DNCC LEADERBOARD
+</div>
+
+<div class="text-[22px] text-blue-300 mt-2">
+leaderboard.dncc.co.id
+</div>
+
+</div>
+
 </div>
 
 @push('scripts')
