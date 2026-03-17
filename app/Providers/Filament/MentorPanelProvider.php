@@ -25,7 +25,7 @@ class MentorPanelProvider extends PanelProvider
         return $panel
             ->id('mentor')
             ->path('mentor')
-            ->login(\App\Filament\Pages\Auth\Login::class)
+            // ->login(false)
             ->colors([
                 'primary' => Color::Blue,
             ])
@@ -51,6 +51,7 @@ class MentorPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
-            ]);
+                'role:mentor',
+            ])->authGuard('web');
     }
 }

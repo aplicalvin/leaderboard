@@ -24,7 +24,9 @@ class ScoreLogsResource extends Resource
 
     public static function canViewAny(): bool
     {
-        return auth()->user()?->hasRole('admin');
+        $user = auth()->user();
+
+        return $user ? $user->hasRole('admin') : false;
     }
 
     public static function form(Form $form): Form

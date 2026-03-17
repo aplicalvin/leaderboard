@@ -15,7 +15,7 @@
                     <a href="/leaderboard" class="{{ request()->is('leaderboard') ? 'text-mariner-700 font-bold' : 'text-mariner-500 font-medium' }} hover:text-mariner-800 px-3 py-2 rounded-md transition-colors">Klasemen</a>
                     <a href="/class" class="{{ request()->is('class') ? 'text-mariner-700 font-bold' : 'text-mariner-500 font-medium' }} hover:text-mariner-800 px-3 py-2 rounded-md transition-colors">Kelas</a>
                     <a href="/member" class="{{ request()->is('member') ? 'text-mariner-700 font-bold' : 'text-mariner-500 font-medium' }} hover:text-mariner-800 px-3 py-2 rounded-md transition-colors">Anggota</a>
-                    <a href="/mentor" class="{{ request()->is('mentor') ? 'text-mariner-700 font-bold' : 'text-mariner-500 font-medium' }} hover:text-mariner-800 px-3 py-2 rounded-md transition-colors">Mentor</a>
+                    <a href="/daftar-mentor" class="{{ request()->is('mentor') ? 'text-mariner-700 font-bold' : 'text-mariner-500 font-medium' }} hover:text-mariner-800 px-3 py-2 rounded-md transition-colors">Mentor</a>
                 </div>
             </div>
 

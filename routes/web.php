@@ -15,11 +15,12 @@ Route::get('/leaderboard', [LeaderboardController::class, 'index']);
 
 // MEMBER
 Route::get('/member', [MemberController::class, 'index']);
-Route::get('/{username}', [MemberController::class, 'show']);
 
 // MENTOR 
-Route::get('/mentor', [MentorController::class, 'index']);
-Route::get('/mentor/{id}', [MentorController::class, 'show']);
+Route::get('/daftar-mentor', [MentorController::class, 'index']);
+Route::get('/daftar-mentor/{id}', [MentorController::class, 'show']);
 
 // CLASS
 Route::get('/class', [ClassController::class, 'index']);
+
+Route::get('/{username}', [MemberController::class, 'show']);
