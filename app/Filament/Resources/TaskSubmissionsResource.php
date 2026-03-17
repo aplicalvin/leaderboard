@@ -29,7 +29,7 @@ class TaskSubmissionsResource extends Resource
 
     protected static ?int $navigationSort = 5;
 
-    public static function form(Form $form): Form
+public static function form(Form $form): Form
     {
         return $form
             ->schema([
@@ -37,25 +37,28 @@ class TaskSubmissionsResource extends Resource
                     ->label('Task')
                     ->options(Task::pluck('title', 'id'))
                     ->searchable()
-                    ->required(),
+                    ->required()
+                    ->disabledOn('edit'),
 
                 Select::make('user_id')
                     ->label('Member')
                     ->options(User::pluck('full_name', 'id'))
                     ->searchable()
-                    ->required(),
+                    ->required()
+                    ->disabledOn('edit'),
 
                 TextInput::make('submission_link')
                     ->url()
-                    ->required(),
+                    ->required()
+                    ->disabledOn('edit'),
 
                 Textarea::make('submission_note')
                     ->label('Note')
-                    ->columnSpanFull(),
+                    ->columnSpanFull()
+                    ->disabledOn('edit'),
 
                 Select::make('status')
                     ->options(function ($record) {
-
                         if ($record && $record->status !== 'pending') {
                             return [
                                 'approved' => 'Approved',
@@ -72,11 +75,14 @@ class TaskSubmissionsResource extends Resource
                     ->required(),
 
                 DateTimePicker::make('submitted_at')
-                    ->label('Submitted At'),
+                    ->label('Submitted At')
+                    ->disabledOn('edit'),
 
                 DateTimePicker::make('reviewed_at')
-                    ->label('Reviewed At'),
-            ]);
+                    ->label('Reviewed At')
+                    ->disabledOn('edit'),
+            ])
+            ->columns(1);
     }
 
     public static function table(Table $table): Table

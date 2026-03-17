@@ -14,7 +14,7 @@ Route::get('/', [HomeController::class, 'index']);
 Route::get('/leaderboard', [LeaderboardController::class, 'index']);
 
 // MEMBER
-Route::get('/member', [MemberController::class, 'index']);
+Route::get('/daftar-member', [MemberController::class, 'index']);
 
 // MENTOR 
 Route::get('/daftar-mentor', [MentorController::class, 'index']);

@@ -119,6 +119,10 @@ class User extends Authenticatable implements FilamentUser
             return $this->hasRole('mentor');
         }
 
+        if ($panel->getId() === 'member') {
+            return $this->hasRole('member');
+        }
+
         return false;
     }
 }

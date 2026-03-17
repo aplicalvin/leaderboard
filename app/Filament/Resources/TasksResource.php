@@ -60,7 +60,8 @@ class TasksResource extends Resource
                 DateTimePicker::make('deadline')
                     ->required()
                     ->label('Deadline'),
-            ]);
+            ])
+            ->columns(1);
     }
 
     public static function table(Table $table): Table
