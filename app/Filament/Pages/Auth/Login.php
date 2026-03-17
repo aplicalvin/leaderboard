@@ -35,4 +35,29 @@ class Login extends BaseLogin
             'password' => $data['password'],
         ];
     }
+
+
+    public function authenticate(): ?\Filament\Http\Responses\Auth\Contracts\LoginResponse
+    {
+        try {
+            $this->rateLimit(5);
+        } catch (\DanHarrin\LivewireRateLimiting\Exceptions\TooManyRequestsException $exception) {
+            $this->getRateLimitedNotification($exception)?->send();
+            return null;
+        }
+
+        $data = $this->form->getState();
+
+        if (! \Filament\Facades\Filament::auth()->attempt($this->getCredentialsFromFormData($data), $data['remember'] ?? false)) {
+            $this->throwFailureValidationException();
+        }
+
+        // Login berhasil
+        session()->regenerate();
+
+        // KUNCI PERBAIKANNYA DI SINI:
+        // Panggil class LoginResponse buatan Anda secara eksplisit agar 
+        // Filament tidak menggunakan redirect default-nya.
+        return app(\App\Http\Responses\LoginResponse::class);
+    }
 }

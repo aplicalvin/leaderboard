@@ -22,7 +22,7 @@ class ClassPolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->hasRole('mentor');
+        return $user->hasAnyRole(['mentor', 'member']);
     }
 
     /**
@@ -30,7 +30,17 @@ class ClassPolicy
      */
     public function view(User $user, ClassModel $classModel): bool
     {
-        return $classModel->mentor_id === $user->id;
+        // Mentor: hanya class miliknya
+        if ($user->hasRole('mentor')) {
+            return $classModel->mentor_id === $user->id;
+        }
+
+        // Member: hanya class yang dia join
+        if ($user->hasRole('member')) {
+            return $classModel->members()->where('user_id', $user->id)->exists();
+        }
+
+        return false;
     }
 
     /**

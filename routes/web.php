@@ -14,14 +14,13 @@ Route::get('/', [HomeController::class, 'index']);
 Route::get('/leaderboard', [LeaderboardController::class, 'index']);
 
 // MEMBER
-Route::get('/member', [MemberController::class, 'index']);
+Route::get('/daftar-member', [MemberController::class, 'index']);
 
 // MENTOR 
-Route::get('/mentor', [MentorController::class, 'index']);
-Route::get('/mentor/{id}', [MentorController::class, 'show']);
+Route::get('/daftar-mentor', [MentorController::class, 'index']);
+Route::get('/daftar-mentor/{id}', [MentorController::class, 'show']);
 
 // CLASS
 Route::get('/class', [ClassController::class, 'index']);
 
-// Member Profile (Wildcard route should be at the bottom to avoid overshadowing other static routes)
 Route::get('/{username}', [MemberController::class, 'show']);

@@ -22,7 +22,7 @@ class TaskPolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->hasRole('mentor');
+         return $user->hasAnyRole(['mentor', 'member']);
     }
 
     /**
@@ -30,8 +30,20 @@ class TaskPolicy
      */
     public function view(User $user, Task $task): bool
     {
-        return $user->hasRole('mentor')
-            && $task->class->mentor_id === $user->id;
+        // Mentor
+        if ($user->hasRole('mentor')) {
+            return $task->class->mentor_id === $user->id;
+        }
+
+        // Member
+        if ($user->hasRole('member')) {
+            return $task->class
+                ->members()
+                ->where('user_id', $user->id)
+                ->exists();
+        }
+
+        return false;
     }
 
     /**

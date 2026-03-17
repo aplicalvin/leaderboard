@@ -19,7 +19,7 @@ class TaskSubmissionPolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->hasRole(['mentor']);
+        return $user->hasRole(['mentor','member']);
     }
 
     /**
@@ -27,6 +27,16 @@ class TaskSubmissionPolicy
      */
     public function view(User $user, TaskSubmission $taskSubmission): bool
     {
+        // Mentor
+        if ($user->hasRole('mentor')) {
+            return $taskSubmission->task->class->mentor_id === $user->id;
+        }
+
+        // Member
+        if ($user->hasRole('member')) {
+            return $taskSubmission->user_id === $user->id;
+        }
+
         return false;
     }
 
@@ -35,7 +45,7 @@ class TaskSubmissionPolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        return $user->hasRole('member');
     }
 
     /**
@@ -43,7 +53,17 @@ class TaskSubmissionPolicy
      */
     public function update(User $user, TaskSubmission $taskSubmission): bool
     {
-        return $taskSubmission->task->class->mentor_id === $user->id;
+        // Mentor (review)
+        if ($user->hasRole('mentor')) {
+            return $taskSubmission->task->class->mentor_id === $user->id;
+        }
+
+        // Member (edit sendiri)
+        if ($user->hasRole('member')) {
+            return $taskSubmission->user_id === $user->id;
+        }
+
+        return false;
     }
 
     /**
@@ -51,6 +71,10 @@ class TaskSubmissionPolicy
      */
     public function delete(User $user, TaskSubmission $taskSubmission): bool
     {
+        if ($user->hasRole('member')) {
+            return $taskSubmission->user_id === $user->id;
+        }
+
         return false;
     }
 

@@ -14,14 +14,14 @@
                 <div class="ml-10 flex items-baseline space-x-8">
                     <a href="/leaderboard" class="{{ request()->is('leaderboard') ? 'text-mariner-700 font-bold' : 'text-mariner-500 font-medium' }} hover:text-mariner-800 px-3 py-2 rounded-md transition-colors">Klasemen</a>
                     <a href="/class" class="{{ request()->is('class') ? 'text-mariner-700 font-bold' : 'text-mariner-500 font-medium' }} hover:text-mariner-800 px-3 py-2 rounded-md transition-colors">Kelas</a>
-                    <a href="/member" class="{{ request()->is('member') ? 'text-mariner-700 font-bold' : 'text-mariner-500 font-medium' }} hover:text-mariner-800 px-3 py-2 rounded-md transition-colors">Anggota</a>
-                    <a href="/mentor" class="{{ request()->is('mentor') ? 'text-mariner-700 font-bold' : 'text-mariner-500 font-medium' }} hover:text-mariner-800 px-3 py-2 rounded-md transition-colors">Mentor</a>
+                    <a href="/daftar-member" class="{{ request()->is('member') ? 'text-mariner-700 font-bold' : 'text-mariner-500 font-medium' }} hover:text-mariner-800 px-3 py-2 rounded-md transition-colors">Anggota</a>
+                    <a href="/daftar-mentor" class="{{ request()->is('mentor') ? 'text-mariner-700 font-bold' : 'text-mariner-500 font-medium' }} hover:text-mariner-800 px-3 py-2 rounded-md transition-colors">Mentor</a>
                 </div>
             </div>
 
             <!-- Login Button -->
             <div class="hidden md:block">
-                <a href="/admin" class="relative group inline-flex items-center justify-center px-6 py-2 text-sm font-bold text-white transition-all duration-200 outline-none focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-mariner-400 rounded-full bg-mariner-600 hover:bg-mariner-700 shadow-md hover:shadow-lg hover:-translate-y-0.5 border border-mariner-500 overflow-hidden">
+                <a href="/admin/login" class="relative group inline-flex items-center justify-center px-6 py-2 text-sm font-bold text-white transition-all duration-200 outline-none focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-mariner-400 rounded-full bg-mariner-600 hover:bg-mariner-700 shadow-md hover:shadow-lg hover:-translate-y-0.5 border border-mariner-500 overflow-hidden">
                     <span class="absolute inset-0 w-full h-full -mt-1 rounded-lg opacity-30 bg-gradient-to-b from-transparent via-transparent to-black"></span>
                     <span class="relative">Masuk Yuk!</span>
                 </a>
@@ -43,10 +43,10 @@
         <div class="px-4 pt-4 pb-6 space-y-2">
             <a href="/leaderboard" class="block px-4 py-3 rounded-xl font-bold {{ request()->is('leaderboard') ? 'text-mariner-700 bg-mariner-100' : 'text-mariner-500 hover:text-mariner-800 hover:bg-mariner-50' }}">Klasemen</a>
             <a href="/class" class="block px-4 py-3 rounded-xl font-bold {{ request()->is('class') ? 'text-mariner-700 bg-mariner-100' : 'text-mariner-500 hover:text-mariner-800 hover:bg-mariner-50' }}">Kelas</a>
-            <a href="/member" class="block px-4 py-3 rounded-xl font-bold {{ request()->is('member') ? 'text-mariner-700 bg-mariner-100' : 'text-mariner-500 hover:text-mariner-800 hover:bg-mariner-50' }}">Anggota</a>
-            <a href="/mentor" class="block px-4 py-3 rounded-xl font-bold {{ request()->is('mentor') ? 'text-mariner-700 bg-mariner-100' : 'text-mariner-500 hover:text-mariner-800 hover:bg-mariner-50' }}">Mentor</a>
+            <a href="/daftar-member" class="block px-4 py-3 rounded-xl font-bold {{ request()->is('member') ? 'text-mariner-700 bg-mariner-100' : 'text-mariner-500 hover:text-mariner-800 hover:bg-mariner-50' }}">Anggota</a>
+            <a href="/daftar-mentor" class="block px-4 py-3 rounded-xl font-bold {{ request()->is('mentor') ? 'text-mariner-700 bg-mariner-100' : 'text-mariner-500 hover:text-mariner-800 hover:bg-mariner-50' }}">Mentor</a>
             <div class="pt-4 mt-2 border-t border-mariner-100">
-                <a href="/admin" class="block w-full text-center px-4 py-3 rounded-xl font-bold text-white bg-mariner-600 hover:bg-mariner-700 shadow-md">Masuk Yuk!</a>
+                <a href="/admin/login" class="block w-full text-center px-4 py-3 rounded-xl font-bold text-white bg-mariner-600 hover:bg-mariner-700 shadow-md">Masuk Yuk!</a>
             </div>
         </div>
     </div>
