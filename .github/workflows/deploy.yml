@@ -21,10 +21,10 @@ jobs:
             cd /var/www/leaderboard
 
             echo "Pull latest code"
-            git pull origin main
+            sudo git pull origin main
 
             echo "Install dependency"
-            composer install --no-interaction --prefer-dist --optimize-autoloader
+            sudo composer install --no-interaction --prefer-dist --optimize-autoloader
 
             echo "Laravel optimize"
             php artisan config:cache
@@ -32,7 +32,8 @@ jobs:
             php artisan view:cache
 
             echo "Fix permission"
-            chown -R www-data:www-data storage bootstrap/cache
+            sudo chown -R www-data:www-data storage bootstrap/cache
+            sudo chmod -R 775 storage bootstrap/cache
 
             echo "Restart service"
             sudo systemctl restart php8.4-fpm
